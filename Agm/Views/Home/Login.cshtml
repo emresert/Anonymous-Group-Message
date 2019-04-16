@@ -1,0 +1,61 @@
+﻿@model Agm.Models.Class.usersModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container">
+                    <img src="~/Files/Img/g5.gif" class="brand_logo" alt="Logo">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center form_container">
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                {
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        @Html.TextBoxFor(u => u.userLoginName, new { @class = "form-control input_user", @placeholder = "Kullanıcı Adı", @type = "Text" })
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        @Html.PasswordFor(u => u.userPassword, new { @class = "form-control input_pass", @placeholder = "Şifre" })
+
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                            <label class="custom-control-label" for="customControlInline">Şifreyi Hatırla</label>
+                        </div>
+                    </div>
+
+
+
+                            <div class="d-flex justify-content-center mt-3 login_container">
+                                <button type="submit" name="button" class="btn login_btn">Giriş Yap</button>
+                            </div>
+                }
+            </div>
+            @if (ViewBag.ResultMessage != null)
+            {
+                <div class="alert alert-dismissible @ViewBag.ResultMessageCss">
+                    <i>@ViewBag.ResultMessage</i>
+                </div>
+            }
+            <div class="mt-4">
+                <div class="d-flex justify-content-center links">
+                    Hesabınız yok mu? <a href="#" class="ml-2">Kayıt ol</a>
+                </div>
+                <div class="d-flex justify-content-center links">
+                    <a href="#">Şifremi unuttum</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
