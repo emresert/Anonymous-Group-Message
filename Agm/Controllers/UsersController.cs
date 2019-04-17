@@ -25,13 +25,31 @@ namespace Agm.Controllers
         [HttpPost]
         public ActionResult Create(usersModel uModel,HttpPostedFileBase file)
         {
+            var user = new Users();
             if (!ModelState.IsValid)
             {
                
                 return View("Create");
             }
+            var controlMail = db.Users.FirstOrDefault(c => c.userEmail == uModel.userEmail);
+            var controlPhoneNumber = db.Users.FirstOrDefault(c => c.userPhoneNumber == uModel.userPhoneNumber);
+            var controlLoginName = db.Users.FirstOrDefault(c => c.userLoginName == uModel.userLoginName);
+            if (controlMail != null) 
+            {
+                TempData["msg"] = "<script>alert('Girmiş olduğunuz mail adresi daha önce kullanılmıştır.')</script>";
+                return View("Create");
+            }
+            else if (controlLoginName !=null)
+            {
+                TempData["msg"] = "<script>alert('Girmiş olduğunuz kullanıcı adı daha önce kullanılmıştır.')</script>";
+                return View("Create");
+            }
+            else if (controlPhoneNumber!=null)
+            {
+                TempData["msg"] = "<script>alert('Girmiş olduğunuz telefon numarası daha önce kullanılmıştır.')</script>";
+                return View("Create");
+            }
 
-            var user = new Users();
             user.userPhoneNumber = uModel.userPhoneNumber;
             user.userNameSurname = uModel.userNameSurname;
             user.userLoginName = uModel.userLoginName;
@@ -44,7 +62,7 @@ namespace Agm.Controllers
                 file.SaveAs(imgPath);
                 user.userImageUrl = "~/User_Images/" + file.FileName;
             }
-            
+            Session["User"] = user;
             db.Users.Add(user);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");

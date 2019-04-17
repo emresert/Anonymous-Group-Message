@@ -1,0 +1,45 @@
+﻿/* User Create Part*/
+.formContainer{
+    width:65% !important;
+}
+.person-card {
+    margin-top: 8em;
+    padding-top: 5em;
+    background-color:whitesmoke !important;
+    
+    
+}
+.person-card .card-title{
+    text-align: center;
+}
+.person-img{
+    width: 12.5em;
+    height:12.5em;
+    position: absolute;
+    top: -7.5em;
+    left: 45%;
+    margin-left: -3em;
+    padding-left:0px;
+    border:7px solid white !important;
+    box-shadow:0px 0px 5px;
+    border-radius:50%;
+    overflow: hidden;
+   
+}
+.card-body{
+    background-color:whitesmoke;
+    
+}
+#create-button{
+    background:rgba(255,193,62,1) !important;
+			color: white !important;
+            border:2px lightgray solid;
+}
+#create-button:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+.badge{
+    margin:1% !important;
+    padding:1% !important;
+}
