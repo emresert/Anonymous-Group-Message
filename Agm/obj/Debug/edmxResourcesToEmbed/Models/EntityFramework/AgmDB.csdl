@@ -51,6 +51,7 @@
     <Property Name="userPassword" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
     <Property Name="userImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Groups" Relationship="Self.UsersGroup" FromRole="Users" ToRole="Groups" />
+    <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Groups_TextMessage">
     <End Role="TextMessage" Type="Self.TextMessage" Multiplicity="0..1" />

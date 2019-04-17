@@ -7,7 +7,7 @@
             background: url('../Files/Img/bi1.jpg') center center !important;
             background-repeat: repeat !important;
             
-            
+          
 		}
 		.user_card {
 			height: 400px;
@@ -88,3 +88,25 @@
             background-color:none !important;
             border-color:#f5c6cb;
         }
+        .card {
+    margin-top: 1em;
+}
+
+
+.person-card {
+    margin-top: 5em;
+    padding-top: 5em;
+}
+.person-card .card-title{
+    text-align: center;
+}
+.person-card .person-img{
+    width: 10em;
+    position: absolute;
+    top: -5em;
+    left: 50%;
+    margin-left: -5em;
+    border-radius: 100%;
+    overflow: hidden;
+    background-color: white;
+}

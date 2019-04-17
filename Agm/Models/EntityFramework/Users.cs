@@ -26,6 +26,7 @@ namespace Agm.Models.EntityFramework
         public string userLoginName { get; set; }
         public string userPassword { get; set; }
         public string userImageUrl { get; set; }
+        public string userEmail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Groups> Groups { get; set; }

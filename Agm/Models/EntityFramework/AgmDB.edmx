@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AgmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AgmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asistance">
           <Key>
             <PropertyRef Name="asistanceId" />
@@ -64,6 +64,7 @@
           <Property Name="userLoginName" Type="nvarchar" MaxLength="100" />
           <Property Name="userPassword" Type="nvarchar" MaxLength="25" />
           <Property Name="userImageUrl" Type="nvarchar" MaxLength="250" />
+          <Property Name="userEmail" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UsersGroup">
           <Key>
@@ -195,8 +196,7 @@
             <End Role="UsersGroup" EntitySet="UsersGroup" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AgmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -251,6 +251,7 @@
           <Property Name="userPassword" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="userImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Groups" Relationship="Self.UsersGroup" FromRole="Users" ToRole="Groups" />
+          <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Groups_TextMessage">
           <End Role="TextMessage" Type="Self.TextMessage" Multiplicity="0..1" />
@@ -345,6 +346,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AgmModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="userEmail" ColumnName="userEmail" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="userPhoneNumber" ColumnName="userPhoneNumber" />
                 <ScalarProperty Name="userNameSurname" ColumnName="userNameSurname" />

@@ -208,6 +208,7 @@
     <Content Include="scripts\popper-utils.min.js" />
     <Content Include="scripts\popper.js" />
     <Content Include="scripts\popper.min.js" />
+    <Content Include="scripts\site.js" />
     <Content Include="scripts\umd\popper-utils.js" />
     <Content Include="scripts\umd\popper-utils.min.js" />
     <Content Include="scripts\umd\popper.js" />
@@ -218,6 +219,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -274,6 +276,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -284,6 +287,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\Img\" />
+    <Folder Include="User_Images\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="scripts\index.d.ts" />

@@ -59,6 +59,7 @@
     <Property Name="userLoginName" Type="nvarchar" MaxLength="100" />
     <Property Name="userPassword" Type="nvarchar" MaxLength="25" />
     <Property Name="userImageUrl" Type="nvarchar" MaxLength="250" />
+    <Property Name="userEmail" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="UsersGroup">
     <Key>

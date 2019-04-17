@@ -41,6 +41,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="AgmModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
           <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="userPhoneNumber" ColumnName="userPhoneNumber" />
           <ScalarProperty Name="userNameSurname" ColumnName="userNameSurname" />
