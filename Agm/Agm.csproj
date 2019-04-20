@@ -150,6 +150,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\homeIndex.css" />
     <Content Include="Content\navbarIndex.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\userCreate.css" />
