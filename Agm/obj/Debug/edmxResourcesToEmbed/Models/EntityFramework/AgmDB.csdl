@@ -18,8 +18,9 @@
     <Property Name="groupImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TextMessage" Relationship="Self.FK_Groups_TextMessage" FromRole="Groups" ToRole="TextMessage" />
     <NavigationProperty Name="Asistance" Relationship="Self.GroupAsistance" FromRole="Groups" ToRole="Asistance" />
-    <NavigationProperty Name="Manager" Relationship="Self.GroupManager" FromRole="Groups" ToRole="Manager" />
     <NavigationProperty Name="Users" Relationship="Self.UsersGroup" FromRole="Groups" ToRole="Users" />
+    <Property Name="managerFk" Type="Int32" />
+    <NavigationProperty Name="Manager" Relationship="AgmModel.FK_Groups_Manager" FromRole="Groups" ToRole="Manager" />
   </EntityType>
   <EntityType Name="Manager">
     <Key>
@@ -27,7 +28,7 @@
     </Key>
     <Property Name="managerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="managerNameSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Groups" Relationship="Self.GroupManager" FromRole="Manager" ToRole="Groups" />
+    <NavigationProperty Name="Groups" Relationship="AgmModel.FK_Groups_Manager" FromRole="Manager" ToRole="Groups" />
   </EntityType>
   <EntityType Name="TextMessage">
     <Key>
@@ -69,10 +70,6 @@
     <End Role="Asistance" Type="Self.Asistance" Multiplicity="*" />
     <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
   </Association>
-  <Association Name="GroupManager">
-    <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
-    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
-  </Association>
   <Association Name="UsersGroup">
     <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
     <End Role="Users" Type="Self.Users" Multiplicity="*" />
@@ -91,13 +88,25 @@
       <End Role="Asistance" EntitySet="Asistance" />
       <End Role="Groups" EntitySet="Groups" />
     </AssociationSet>
-    <AssociationSet Name="GroupManager" Association="Self.GroupManager">
-      <End Role="Groups" EntitySet="Groups" />
-      <End Role="Manager" EntitySet="Manager" />
-    </AssociationSet>
     <AssociationSet Name="UsersGroup" Association="Self.UsersGroup">
       <End Role="Groups" EntitySet="Groups" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
+    <AssociationSet Name="FK_Groups_Manager" Association="AgmModel.FK_Groups_Manager">
+      <End EntitySet="Manager" Role="Manager" />
+      <End EntitySet="Groups" Role="Groups" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_Groups_Manager">
+    <End Type="AgmModel.Manager" Multiplicity="0..1" Role="Manager" />
+    <End Type="AgmModel.Groups" Multiplicity="*" Role="Groups" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="managerId" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="managerFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

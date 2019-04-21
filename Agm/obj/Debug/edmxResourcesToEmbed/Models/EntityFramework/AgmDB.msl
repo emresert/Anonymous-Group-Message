@@ -12,6 +12,7 @@
     <EntitySetMapping Name="Groups">
       <EntityTypeMapping TypeName="AgmModel.Groups">
         <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="managerFk" ColumnName="managerFk" />
           <ScalarProperty Name="groupId" ColumnName="groupId" />
           <ScalarProperty Name="groupName" ColumnName="groupName" />
           <ScalarProperty Name="textFk" ColumnName="textFk" />
@@ -57,14 +58,6 @@
       </EndProperty>
       <EndProperty Name="Groups">
         <ScalarProperty Name="groupId" ColumnName="groupFk" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="GroupManager" TypeName="AgmModel.GroupManager" StoreEntitySet="GroupManager">
-      <EndProperty Name="Groups">
-        <ScalarProperty Name="groupId" ColumnName="groupFk" />
-      </EndProperty>
-      <EndProperty Name="Manager">
-        <ScalarProperty Name="managerId" ColumnName="managerFk" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="UsersGroup" TypeName="AgmModel.UsersGroup" StoreEntitySet="UsersGroup">

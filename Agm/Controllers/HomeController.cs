@@ -25,7 +25,7 @@ namespace Agm.Controllers
             {
                 FormsAuthentication.SetAuthCookie(user.userNameSurname, false);
                 Session["User"] = user;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home",user.userLoginName);
             }
             else
             {
@@ -37,11 +37,32 @@ namespace Agm.Controllers
         }
         public ActionResult Index()
         {
-            if (Session["User"] == null)
+            var user = Session["User"] as Users;
+            if (user == null)
             {
                return RedirectToAction("Login", "Home");
             }
-            return View();
+            var groups = db.Groups.ToList();
+           
+            var groupsList = new List<groupsModel>();
+            foreach (var group in groups) {
+                if (group.groupId == user.userId)
+                {
+                    var gModel = new groupsModel {
+                        groupId=group.groupId,
+                        groupName=group.groupName,
+                        groupImageUrl=group.groupImageUrl,
+                        Asistance= group.Asistance,
+                       
+                        Users=group.Users,
+                        textFk=group.textFk
+                    };
+                    groupsList.Add(gModel);
+                }
+            }
+
+
+            return View(groupsList);
         }
     }
 }

@@ -18,7 +18,6 @@ namespace Agm.Models.EntityFramework
         public Groups()
         {
             this.Asistance = new HashSet<Asistance>();
-            this.Manager = new HashSet<Manager>();
             this.Users = new HashSet<Users>();
         }
     
@@ -26,13 +25,13 @@ namespace Agm.Models.EntityFramework
         public string groupName { get; set; }
         public Nullable<int> textFk { get; set; }
         public string groupImageUrl { get; set; }
+        public Nullable<int> managerFk { get; set; }
     
         public virtual TextMessage TextMessage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistance> Asistance { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Manager> Manager { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users> Users { get; set; }
+        public virtual Manager Manager { get; set; }
     }
 }
