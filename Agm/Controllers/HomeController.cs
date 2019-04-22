@@ -44,20 +44,26 @@ namespace Agm.Controllers
                return RedirectToAction("Login", "Home");
             }
 
-            var result = db.userGroups(user.userId).ToList(); ;
-            var groupList = new List<groupsModel>();
-            foreach(var group in result)
+            var result = db.userGroups(user.userId).ToList();
+            if (result.Count != 0 )
             {
-                var gModel = new groupsModel();
-                gModel.groupName = group.groupName;
-                gModel.groupImageUrl = group.groupImageUrl;             
-                groupList.Add(gModel);
+                var groupList = new List<groupsModel>();
+                foreach (var group in result)
+                {
+                    var gModel = new groupsModel();
+                    gModel.groupName = group.groupName;
+                    gModel.groupImageUrl = group.groupImageUrl;
+                    groupList.Add(gModel);
+                }
+                return View(groupList);
             }
-         
+            else
+            {
+                ViewBag.NoResult = "Henüz herhangi bir grubunuz yok.";
+            }
 
-
-
-            return View(groupList);
+            return View();
+          
         }
     }
 }
