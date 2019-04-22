@@ -12,6 +12,8 @@ namespace Agm.Models.EntityFramework
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class AgmEntities : DbContext
     {
@@ -30,5 +32,24 @@ namespace Agm.Models.EntityFramework
         public virtual DbSet<Manager> Manager { get; set; }
         public virtual DbSet<TextMessage> TextMessage { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+    
+        public virtual ObjectResult<userGroups_Result> userGroups(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<userGroups_Result>("userGroups", idParameter);
+        }
+
+        internal object userGroups_Result(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal object userGroups_Result()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

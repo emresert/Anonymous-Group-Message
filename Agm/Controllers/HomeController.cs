@@ -37,32 +37,27 @@ namespace Agm.Controllers
         }
         public ActionResult Index()
         {
+            
             var user = Session["User"] as Users;
             if (user == null)
             {
                return RedirectToAction("Login", "Home");
             }
-            var groups = db.Groups.ToList();
-           
-            var groupsList = new List<groupsModel>();
-            foreach (var group in groups) {
-                if (group.groupId == user.userId)
-                {
-                    var gModel = new groupsModel {
-                        groupId=group.groupId,
-                        groupName=group.groupName,
-                        groupImageUrl=group.groupImageUrl,
-                        Asistance= group.Asistance,
-                       
-                        Users=group.Users,
-                        textFk=group.textFk
-                    };
-                    groupsList.Add(gModel);
-                }
+
+            var result = db.userGroups(user.userId).ToList(); ;
+            var groupList = new List<groupsModel>();
+            foreach(var group in result)
+            {
+                var gModel = new groupsModel();
+                gModel.groupName = group.groupName;
+                gModel.groupImageUrl = group.groupImageUrl;             
+                groupList.Add(gModel);
             }
+         
 
 
-            return View(groupsList);
+
+            return View(groupList);
         }
     }
 }

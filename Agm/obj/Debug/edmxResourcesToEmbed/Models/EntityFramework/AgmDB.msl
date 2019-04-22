@@ -68,5 +68,13 @@
         <ScalarProperty Name="userId" ColumnName="usersFk" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="userGroups" FunctionName="AgmModel.Store.userGroups">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AgmModel.userGroups_Result">
+          <ScalarProperty Name="groupName" ColumnName="groupName" />
+          <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

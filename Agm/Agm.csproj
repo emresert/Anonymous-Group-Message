@@ -229,6 +229,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Class\groupsModel.cs" />
+    <Compile Include="Models\Class\usersgroupModel.cs" />
     <Compile Include="Models\Class\usersModel.cs" />
     <Compile Include="Models\EntityFramework\AgmDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -255,6 +256,9 @@
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\TextMessage.cs">
+      <DependentUpon>AgmDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\userGroups_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Users.cs">

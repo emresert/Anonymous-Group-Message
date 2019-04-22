@@ -60,7 +60,7 @@ namespace Agm.Controllers
                 string fileName = Path.GetFileName(file.FileName);
                 string imgPath = Path.Combine(Server.MapPath("~/User_Images/"), fileName);
                 file.SaveAs(imgPath);
-                user.userImageUrl = "~/User_Images/" + file.FileName;
+                user.userImageUrl = "/User_Images/" + file.FileName;
             }
             Session["User"] = user;
             db.Users.Add(user);

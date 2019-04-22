@@ -19,6 +19,7 @@ namespace Agm.Models.Class
         public virtual ICollection<Asistance> Asistance { get; set; }
        
         public virtual ICollection<Users> Users { get; set; }
+        public virtual ICollection<usersgroupModel> usersgroupModel { get; set; }
         public virtual Manager Manager { get; set; }
     }
 }

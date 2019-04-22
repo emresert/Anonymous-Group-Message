@@ -134,6 +134,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="userGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="AgmModelStoreContainer">
     <EntitySet Name="Asistance" EntityType="Self.Asistance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroupAsistance" EntityType="Self.GroupAsistance" Schema="dbo" store:Type="Tables" />

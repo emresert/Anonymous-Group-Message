@@ -96,6 +96,9 @@
       <End EntitySet="Manager" Role="Manager" />
       <End EntitySet="Groups" Role="Groups" />
     </AssociationSet>
+    <FunctionImport Name="userGroups" ReturnType="Collection(AgmModel.userGroups_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_Groups_Manager">
     <End Type="AgmModel.Manager" Multiplicity="0..1" Role="Manager" />
@@ -109,4 +112,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="userGroups_Result">
+    <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
+  </ComplexType>
 </Schema>

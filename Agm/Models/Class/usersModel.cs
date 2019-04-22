@@ -33,5 +33,6 @@ namespace Agm.Models.Class
         public string userEmail { get; set; }
        
         public virtual ICollection<Groups> Groups { get; set; }
+        public virtual ICollection<usersgroupModel> usersgroupModel { get; set; }
     }
 }
