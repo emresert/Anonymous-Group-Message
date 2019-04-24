@@ -23,6 +23,7 @@
     <EntitySetMapping Name="Manager">
       <EntityTypeMapping TypeName="AgmModel.Manager">
         <MappingFragment StoreEntitySet="Manager">
+          <ScalarProperty Name="userFk" ColumnName="userFk" />
           <ScalarProperty Name="managerId" ColumnName="managerId" />
           <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
         </MappingFragment>
@@ -76,5 +77,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spAddUserGroups" FunctionName="AgmModel.Store.spAddUserGroups" />
   </EntityContainerMapping>
 </Mapping>

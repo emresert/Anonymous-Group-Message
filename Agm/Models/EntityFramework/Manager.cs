@@ -22,8 +22,10 @@ namespace Agm.Models.EntityFramework
     
         public int managerId { get; set; }
         public string managerNameSurname { get; set; }
+        public Nullable<int> userFk { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Groups> Groups { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

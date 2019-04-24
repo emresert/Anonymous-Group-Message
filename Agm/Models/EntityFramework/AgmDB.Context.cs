@@ -41,15 +41,18 @@ namespace Agm.Models.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<userGroups_Result>("userGroups", idParameter);
         }
-
-        internal object userGroups_Result(int userId)
+    
+        public virtual int spAddUserGroups(Nullable<int> userFk, Nullable<int> groupFk)
         {
-            throw new NotImplementedException();
-        }
-
-        internal object userGroups_Result()
-        {
-            throw new NotImplementedException();
+            var userFkParameter = userFk.HasValue ?
+                new ObjectParameter("userFk", userFk) :
+                new ObjectParameter("userFk", typeof(int));
+    
+            var groupFkParameter = groupFk.HasValue ?
+                new ObjectParameter("groupFk", groupFk) :
+                new ObjectParameter("groupFk", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddUserGroups", userFkParameter, groupFkParameter);
         }
     }
 }

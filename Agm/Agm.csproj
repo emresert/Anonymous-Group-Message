@@ -150,6 +150,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\groupIndex.css" />
     <Content Include="Content\homeIndex.css" />
     <Content Include="Content\navbarIndex.css" />
     <Content Include="Content\site.css" />
@@ -223,6 +224,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -289,6 +291,8 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_UserIndex.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\Groups\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -299,6 +303,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\Img\" />
+    <Folder Include="Group_Images\" />
     <Folder Include="User_Images\" />
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,7 @@ namespace Agm.Models.EntityFramework
         public Users()
         {
             this.Groups = new HashSet<Groups>();
+            this.Manager = new HashSet<Manager>();
         }
     
         public int userId { get; set; }
@@ -30,5 +31,7 @@ namespace Agm.Models.EntityFramework
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Groups> Groups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Manager> Manager { get; set; }
     }
 }

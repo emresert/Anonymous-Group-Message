@@ -31,6 +31,7 @@
     </Key>
     <Property Name="managerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="managerNameSurname" Type="nvarchar" MaxLength="100" />
+    <Property Name="userFk" Type="int" />
   </EntityType>
   <EntityType Name="TextMessage">
     <Key>
@@ -110,6 +111,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Manager_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="userFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UsersGroup_Groups">
     <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
     <End Role="UsersGroup" Type="Self.UsersGroup" Multiplicity="*" />
@@ -134,6 +147,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="spAddUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userFk" Type="int" Mode="In" />
+    <Parameter Name="groupFk" Type="int" Mode="In" />
+  </Function>
   <Function Name="userGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
@@ -160,6 +177,10 @@
     <AssociationSet Name="FK_Groups_TextMessage" Association="Self.FK_Groups_TextMessage">
       <End Role="TextMessage" EntitySet="TextMessage" />
       <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Users" Association="Self.FK_Manager_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Manager" EntitySet="Manager" />
     </AssociationSet>
     <AssociationSet Name="FK_UsersGroup_Groups" Association="Self.FK_UsersGroup_Groups">
       <End Role="Groups" EntitySet="Groups" />

@@ -29,6 +29,8 @@
     <Property Name="managerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="managerNameSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Groups" Relationship="AgmModel.FK_Groups_Manager" FromRole="Manager" ToRole="Groups" />
+    <Property Name="userFk" Type="Int32" />
+    <NavigationProperty Name="Users" Relationship="AgmModel.FK_Manager_Users" FromRole="Manager" ToRole="Users" />
   </EntityType>
   <EntityType Name="TextMessage">
     <Key>
@@ -53,6 +55,7 @@
     <Property Name="userImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Groups" Relationship="Self.UsersGroup" FromRole="Users" ToRole="Groups" />
     <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Manager" Relationship="AgmModel.FK_Manager_Users" FromRole="Users" ToRole="Manager" />
   </EntityType>
   <Association Name="FK_Groups_TextMessage">
     <End Role="TextMessage" Type="Self.TextMessage" Multiplicity="0..1" />
@@ -99,6 +102,14 @@
     <FunctionImport Name="userGroups" ReturnType="Collection(AgmModel.userGroups_Result)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <AssociationSet Name="FK_Manager_Users" Association="AgmModel.FK_Manager_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Manager" EntitySet="Manager" />
+    </AssociationSet>
+    <FunctionImport Name="spAddUserGroups">
+      <Parameter Name="userFk" Mode="In" Type="Int32" />
+      <Parameter Name="groupFk" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_Groups_Manager">
     <End Type="AgmModel.Manager" Multiplicity="0..1" Role="Manager" />
@@ -116,4 +127,16 @@
     <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
     <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
   </ComplexType>
+  <Association Name="FK_Manager_Users">
+    <End Type="AgmModel.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="AgmModel.Manager" Role="Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="userFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
