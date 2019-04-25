@@ -101,5 +101,15 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGroupJoin" FunctionName="AgmModel.Store.spGroupJoin" />
+    <FunctionImportMapping FunctionImportName="userGroupsUsidGrpid" FunctionName="AgmModel.Store.userGroupsUsidGrpid">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AgmModel.userGroupsUsidGrpid_Result">
+          <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="groupName" ColumnName="groupName" />
+          <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

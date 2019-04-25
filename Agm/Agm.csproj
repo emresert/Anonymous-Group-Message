@@ -266,6 +266,9 @@
     <Compile Include="Models\EntityFramework\TextMessage.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFramework\userGroupsUsidGrpid_Result.cs">
+      <DependentUpon>AgmDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFramework\userGroups_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
@@ -301,6 +304,7 @@
     <Content Include="Views\Groups\Create.cshtml" />
     <Content Include="Views\Groups\EditIndex.cshtml" />
     <Content Include="Views\Groups\Edit.cshtml" />
+    <Content Include="Views\Groups\Join.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -64,5 +64,31 @@ namespace Agm.Models.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGroupsManager_Result>("spGroupsManager", userIdParameter);
         }
+    
+        public virtual int spGroupJoin(Nullable<int> userId, Nullable<int> groupId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var groupIdParameter = groupId.HasValue ?
+                new ObjectParameter("groupId", groupId) :
+                new ObjectParameter("groupId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spGroupJoin", userIdParameter, groupIdParameter);
+        }
+    
+        public virtual ObjectResult<userGroupsUsidGrpid_Result> userGroupsUsidGrpid(Nullable<int> id, Nullable<int> groupid)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var groupidParameter = groupid.HasValue ?
+                new ObjectParameter("groupid", groupid) :
+                new ObjectParameter("groupid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<userGroupsUsidGrpid_Result>("userGroupsUsidGrpid", idParameter, groupidParameter);
+        }
     }
 }

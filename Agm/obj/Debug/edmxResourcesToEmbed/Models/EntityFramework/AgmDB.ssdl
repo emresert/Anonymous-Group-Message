@@ -162,11 +162,19 @@
     <Parameter Name="userFk" Type="int" Mode="In" />
     <Parameter Name="groupFk" Type="int" Mode="In" />
   </Function>
+  <Function Name="spGroupJoin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="groupId" Type="int" Mode="In" />
+  </Function>
   <Function Name="spGroupsManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userId" Type="int" Mode="In" />
   </Function>
   <Function Name="userGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="userGroupsUsidGrpid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="groupid" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="AgmModelStoreContainer">
     <EntitySet Name="Asistance" EntityType="Self.Asistance" Schema="dbo" store:Type="Tables" />

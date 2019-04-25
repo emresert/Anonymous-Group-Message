@@ -167,11 +167,19 @@
           <Parameter Name="userFk" Type="int" Mode="In" />
           <Parameter Name="groupFk" Type="int" Mode="In" />
         </Function>
+        <Function Name="spGroupJoin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="groupId" Type="int" Mode="In" />
+        </Function>
         <Function Name="spGroupsManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
         </Function>
         <Function Name="userGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="userGroupsUsidGrpid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="groupid" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="AgmModelStoreContainer">
           <EntitySet Name="Asistance" EntityType="Self.Asistance" Schema="dbo" store:Type="Tables" />
@@ -330,6 +338,14 @@
           <FunctionImport Name="spGroupsManager" ReturnType="Collection(AgmModel.spGroupsManager_Result)">
           <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spGroupJoin">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="groupId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="userGroupsUsidGrpid" ReturnType="Collection(AgmModel.userGroupsUsidGrpid_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="groupid" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <Association Name="FK_Groups_Manager">
           <End Type="AgmModel.Manager" Multiplicity="0..1" Role="Manager" />
@@ -375,6 +391,11 @@
           <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="managerNameSurname" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="managerId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="userGroupsUsidGrpid_Result">
+          <Property Type="Int32" Name="groupId" Nullable="false" />
+          <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -479,6 +500,16 @@
                 <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
                 <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
                 <ScalarProperty Name="managerId" ColumnName="managerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGroupJoin" FunctionName="AgmModel.Store.spGroupJoin" />
+          <FunctionImportMapping FunctionImportName="userGroupsUsidGrpid" FunctionName="AgmModel.Store.userGroupsUsidGrpid">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AgmModel.userGroupsUsidGrpid_Result">
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="groupName" ColumnName="groupName" />
+                <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

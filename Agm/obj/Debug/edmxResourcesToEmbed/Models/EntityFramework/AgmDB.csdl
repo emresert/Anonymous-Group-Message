@@ -115,6 +115,14 @@
     <FunctionImport Name="spGroupsManager" ReturnType="Collection(AgmModel.spGroupsManager_Result)">
       <Parameter Name="userId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="spGroupJoin">
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+      <Parameter Name="groupId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="userGroupsUsidGrpid" ReturnType="Collection(AgmModel.userGroupsUsidGrpid_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="groupid" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK_Groups_Manager">
     <End Type="AgmModel.Manager" Multiplicity="0..1" Role="Manager" />
@@ -160,5 +168,10 @@
     <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
     <Property Type="String" Name="managerNameSurname" Nullable="true" MaxLength="100" />
     <Property Type="Int32" Name="managerId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="userGroupsUsidGrpid_Result">
+    <Property Type="Int32" Name="groupId" Nullable="false" />
+    <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
   </ComplexType>
 </Schema>

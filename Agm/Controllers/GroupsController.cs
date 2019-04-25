@@ -118,6 +118,11 @@ namespace Agm.Controllers
 
         public ActionResult Edit(int id)
         {
+            var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var group = db.Groups.FirstOrDefault(g => g.groupId == id);
             var change = new groupsModel();
             change.groupId = group.groupId;
@@ -140,9 +145,36 @@ namespace Agm.Controllers
                     change.groupImageUrl = "/Group_Images/" + file.FileName;
                 }
             db.SaveChanges();
-
-
             return RedirectToAction("EditIndex","Groups");
+        }
+        public ActionResult Join()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public  ActionResult Join(groupsModel gModel)
+        {
+            var user = Session["User"] as Users;
+            var group = db.Groups.FirstOrDefault(g => g.groupCode == gModel.groupCode);
+           if(group == null)
+            {
+                TempData["msg"] = "<script>alert('Girmiş olduğunuz grup kodu hatalıdır.')</script>";
+                return View("Join");
+            }
+            var control = db.userGroupsUsidGrpid(user.userId,group.groupId).ToList();
+            
+            
+            if (control.Count == 0)
+            {
+                db.spGroupJoin(user.userId, group.groupId);
+            }
+            else
+            {
+                TempData["msg"] = "<script>alert('Zaten bu gruba üyesiniz.')</script>";
+                return View("Join");
+            }
+            return RedirectToAction("Index","Home");
         }
 
 
