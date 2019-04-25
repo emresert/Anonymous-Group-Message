@@ -13,6 +13,7 @@ namespace Agm.Models.Class
         public Nullable<int> textFk { get; set; }
         public string groupImageUrl { get; set; }
         public Nullable<int> managerFk { get; set; }
+        public string groupCode { get; set; }
 
         public virtual TextMessage TextMessage { get; set; }
      

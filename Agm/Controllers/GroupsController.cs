@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Agm.Controllers
 {
@@ -45,7 +47,21 @@ namespace Agm.Controllers
                 return View("Create");
             }
             group.groupName = gModel.groupName;
-            
+
+            char[] chars =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            byte[] data = new byte[8];
+            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetBytes(data);
+            }
+            StringBuilder code = new StringBuilder(8);
+            foreach (byte b in data)
+            {
+                code.Append(chars[b % (chars.Length)]);
+            }
+            group.groupCode = code.ToString();
+
             if (file != null && file.ContentLength > 0)
             {
                 string fileName = Path.GetFileName(file.FileName);

@@ -15,6 +15,7 @@
         <AssociationConnector Association="AgmModel.UsersGroup" ManuallyRouted="false" />
         <AssociationConnector Association="AgmModel.FK_Groups_Manager" />
         <AssociationConnector Association="AgmModel.FK_Manager_Users" />
+        <EntityTypeShape EntityType="AgmModel.sysdiagrams" Width="1.5" PointX="8.125" PointY="4.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

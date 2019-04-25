@@ -26,6 +26,7 @@ namespace Agm.Models.EntityFramework
         public Nullable<int> textFk { get; set; }
         public string groupImageUrl { get; set; }
         public Nullable<int> managerFk { get; set; }
+        public string groupCode { get; set; }
     
         public virtual TextMessage TextMessage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

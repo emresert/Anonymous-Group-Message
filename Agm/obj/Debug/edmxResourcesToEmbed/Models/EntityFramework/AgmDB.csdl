@@ -21,6 +21,7 @@
     <NavigationProperty Name="Users" Relationship="Self.UsersGroup" FromRole="Groups" ToRole="Users" />
     <Property Name="managerFk" Type="Int32" />
     <NavigationProperty Name="Manager" Relationship="AgmModel.FK_Groups_Manager" FromRole="Groups" ToRole="Manager" />
+    <Property Name="groupCode" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="Manager">
     <Key>
@@ -110,6 +111,7 @@
       <Parameter Name="userFk" Mode="In" Type="Int32" />
       <Parameter Name="groupFk" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="sysdiagrams" EntityType="AgmModel.sysdiagrams" />
   </EntityContainer>
   <Association Name="FK_Groups_Manager">
     <End Type="AgmModel.Manager" Multiplicity="0..1" Role="Manager" />
@@ -139,4 +141,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

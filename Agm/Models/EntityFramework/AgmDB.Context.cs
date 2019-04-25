@@ -32,6 +32,7 @@ namespace Agm.Models.EntityFramework
         public virtual DbSet<Manager> Manager { get; set; }
         public virtual DbSet<TextMessage> TextMessage { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     
         public virtual ObjectResult<userGroups_Result> userGroups(Nullable<int> id)
         {

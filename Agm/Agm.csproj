@@ -257,6 +257,9 @@
     <Compile Include="Models\EntityFramework\Manager.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFramework\sysdiagrams.cs">
+      <DependentUpon>AgmDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFramework\TextMessage.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
