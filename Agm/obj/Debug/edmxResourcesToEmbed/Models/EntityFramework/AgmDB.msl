@@ -90,5 +90,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spGroupsManager" FunctionName="AgmModel.Store.spGroupsManager">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AgmModel.spGroupsManager_Result">
+          <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="groupName" ColumnName="groupName" />
+          <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
+          <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
+          <ScalarProperty Name="managerId" ColumnName="managerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

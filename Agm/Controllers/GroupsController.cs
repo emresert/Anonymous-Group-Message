@@ -85,9 +85,66 @@ namespace Agm.Controllers
             db.SaveChanges();
             db.spAddUserGroups(user.userId,group.groupId);
             db.SaveChanges();
-            return RedirectToAction("Index", "Home");
-
-            
+            return RedirectToAction("Index", "Home");          
         }
+        public ActionResult EditIndex()
+        {
+            var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var result = db.spGroupsManager(user.userId).ToList();
+            if (result.Count != 0)
+            {
+                var groupList = new List<groupsModel>();
+                foreach (var group in result)
+                {
+                    var gModel = new groupsModel();
+                    gModel.groupId = group.groupId;
+                    gModel.groupName = group.groupName;
+                    gModel.groupImageUrl = group.groupImageUrl;
+                    groupList.Add(gModel);
+                }
+                return View(groupList);
+            }
+            else
+            {
+                ViewBag.NoResult = "Henüz herhangi bir grubunuz yok.";
+            }
+
+            return View();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var group = db.Groups.FirstOrDefault(g => g.groupId == id);
+            var change = new groupsModel();
+            change.groupId = group.groupId;
+            change.groupName = group.groupName;
+            change.groupImageUrl = group.groupImageUrl;
+            return View(change);
+        }
+        [HttpPost]
+        public ActionResult Edit(int id, groupsModel gModel, HttpPostedFileBase file)
+        {
+            var change = db.Groups.FirstOrDefault(g => g.groupId == id);
+            
+            change.groupId = gModel.groupId;
+            change.groupName = gModel.groupName;
+                if (file != null && file.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(file.FileName);
+                    string imgPath = Path.Combine(Server.MapPath("~/Group_Images/"), fileName);
+                    file.SaveAs(imgPath);
+                    change.groupImageUrl = "/Group_Images/" + file.FileName;
+                }
+            db.SaveChanges();
+
+
+            return RedirectToAction("EditIndex","Groups");
+        }
+
+
     }
 }

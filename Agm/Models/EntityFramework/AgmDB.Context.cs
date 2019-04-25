@@ -55,5 +55,14 @@ namespace Agm.Models.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddUserGroups", userFkParameter, groupFkParameter);
         }
+    
+        public virtual ObjectResult<spGroupsManager_Result> spGroupsManager(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGroupsManager_Result>("spGroupsManager", userIdParameter);
+        }
     }
 }

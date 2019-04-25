@@ -167,6 +167,9 @@
           <Parameter Name="userFk" Type="int" Mode="In" />
           <Parameter Name="groupFk" Type="int" Mode="In" />
         </Function>
+        <Function Name="spGroupsManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+        </Function>
         <Function Name="userGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -324,6 +327,9 @@
             <Parameter Name="groupFk" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="sysdiagrams" EntityType="AgmModel.sysdiagrams" />
+          <FunctionImport Name="spGroupsManager" ReturnType="Collection(AgmModel.spGroupsManager_Result)">
+          <Parameter Name="userId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <Association Name="FK_Groups_Manager">
           <End Type="AgmModel.Manager" Multiplicity="0..1" Role="Manager" />
@@ -363,6 +369,13 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <ComplexType Name="spGroupsManager_Result">
+          <Property Type="Int32" Name="groupId" Nullable="false" />
+          <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="managerNameSurname" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="managerId" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -458,6 +471,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGroupsManager" FunctionName="AgmModel.Store.spGroupsManager">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AgmModel.spGroupsManager_Result">
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="groupName" ColumnName="groupName" />
+                <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
+                <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
+                <ScalarProperty Name="managerId" ColumnName="managerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

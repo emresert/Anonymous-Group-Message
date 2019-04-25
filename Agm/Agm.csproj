@@ -257,6 +257,9 @@
     <Compile Include="Models\EntityFramework\Manager.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFramework\spGroupsManager_Result.cs">
+      <DependentUpon>AgmDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFramework\sysdiagrams.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
@@ -296,6 +299,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Groups\Index.cshtml" />
     <Content Include="Views\Groups\Create.cshtml" />
+    <Content Include="Views\Groups\EditIndex.cshtml" />
+    <Content Include="Views\Groups\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
