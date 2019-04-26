@@ -1,35 +1,26 @@
 ﻿/* Leave Group */
-
-$(document).on("click", ".leaveGroup", function () {
-    var confirmDelete = confirm("Gruptan ayrılmak istediğinize emin misiniz?");
-    if (confirmDelete) {
-        var id = $(this).attr("data-id");
-        alert(id);
-    }
-});
-
-/*
 $(function () {
     $("#myTable").on("click", ".leaveGroup", function () {
         var btn = $(this);
         bootbox.confirm("Gruptan ayrılmak istediğinize emin misiniz?", function (result) {
-            if (result) {
+            if (result ==1) {
                 var id = btn.data("id");
-
+               
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: "/Groups/Leave/" + id,
-                    success: function () {
-                        bootbox.alert("Grup silindi");
+                    success: function () {                       
                         btn.parent().parent().remove();
-
-                    }, 
-                    error: function () {
-                        bootbox.alert("");
-                    }*
+                    },                  
                 });
             }
-
+            else if(result==-1){
+                bootbox.alert("İşlem sırasında bir hata oluştu.");
+            }
+            else {
+                bootbox.alert("İşlem iptal edildi.");
+            }
         })
     });
-});*/
+});
+          
