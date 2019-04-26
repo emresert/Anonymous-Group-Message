@@ -27,8 +27,8 @@ namespace Agm.Models.Class
         [DataType(DataType.Password)]
         [Compare("userPassword")]
         public string reuserPassword { get; set; }
-        
-        public string userImageUrl { get; set; }
+
+        public string userImageUrl { get; set; } 
         [Required(ErrorMessage = "Lütfen e-mail adresinizi giriniz.")]
         public string userEmail { get; set; }
        

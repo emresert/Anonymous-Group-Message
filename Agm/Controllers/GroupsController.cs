@@ -188,6 +188,9 @@ namespace Agm.Controllers
             try
             {
                 db.spLeaveGroup(user.userId,id);
+                var group = db.Groups.FirstOrDefault(g => g.groupId == id);
+                var manager = db.Manager.FirstOrDefault(m => m.managerId == group.managerFk);
+                db.Manager.Remove(manager);
                 db.SaveChanges();
                 return "1";
             }

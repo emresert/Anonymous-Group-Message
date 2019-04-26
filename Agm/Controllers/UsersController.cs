@@ -62,6 +62,9 @@ namespace Agm.Controllers
                 file.SaveAs(imgPath);
                 user.userImageUrl = "/User_Images/" + file.FileName;
             }
+            else if (file==null) {
+                user.userImageUrl = "/User_Images/default.png";
+            }
             Session["User"] = user;
             db.Users.Add(user);
             db.SaveChanges();

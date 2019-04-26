@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AgmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AgmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asistance">
           <Key>
             <PropertyRef Name="asistanceId" />
@@ -223,8 +223,7 @@
             <End Role="UsersGroup" EntitySet="UsersGroup" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AgmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -376,14 +375,14 @@
             <Parameter Name="groupId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGroupsManager" ReturnType="Collection(AgmModel.spGroupsManager_Result)">
-            <Parameter Name="userId" Mode="In" Type="Int32" />
+          <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spLeaveGroup">
             <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="groupId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spUserGroup" ReturnType="Collection(AgmModel.spUserGroup_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="userGroupsUsidGrpid" ReturnType="Collection(AgmModel.userGroupsUsidGrpid_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
