@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="AgmModelStoreContainer" CdmEntityContainer="AgmEntities">
+  <EntityContainerMapping StorageEntityContainer="AgmModelStoreContainer" CdmEntityContainer="AgmEntities1">
     <EntitySetMapping Name="Asistance">
       <EntityTypeMapping TypeName="AgmModel.Asistance">
         <MappingFragment StoreEntitySet="Asistance">
@@ -12,21 +12,32 @@
     <EntitySetMapping Name="Groups">
       <EntityTypeMapping TypeName="AgmModel.Groups">
         <MappingFragment StoreEntitySet="Groups">
-          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
-          <ScalarProperty Name="managerFk" ColumnName="managerFk" />
           <ScalarProperty Name="groupId" ColumnName="groupId" />
           <ScalarProperty Name="groupName" ColumnName="groupName" />
           <ScalarProperty Name="textFk" ColumnName="textFk" />
           <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
+          <ScalarProperty Name="managerFk" ColumnName="managerFk" />
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Manager">
       <EntityTypeMapping TypeName="AgmModel.Manager">
         <MappingFragment StoreEntitySet="Manager">
-          <ScalarProperty Name="userFk" ColumnName="userFk" />
           <ScalarProperty Name="managerId" ColumnName="managerId" />
           <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
+          <ScalarProperty Name="userFk" ColumnName="userFk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="AgmModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -44,13 +55,13 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="AgmModel.Users">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
           <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="userPhoneNumber" ColumnName="userPhoneNumber" />
           <ScalarProperty Name="userNameSurname" ColumnName="userNameSurname" />
           <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
           <ScalarProperty Name="userPassword" ColumnName="userPassword" />
           <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
+          <ScalarProperty Name="userEmail" ColumnName="userEmail" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -70,26 +81,8 @@
         <ScalarProperty Name="userId" ColumnName="usersFk" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="userGroups" FunctionName="AgmModel.Store.userGroups">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="AgmModel.userGroups_Result">
-          <ScalarProperty Name="groupName" ColumnName="groupName" />
-          <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="spAddUserGroups" FunctionName="AgmModel.Store.spAddUserGroups" />
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="AgmModel.sysdiagrams">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="definition" ColumnName="definition" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spGroupJoin" FunctionName="AgmModel.Store.spGroupJoin" />
     <FunctionImportMapping FunctionImportName="spGroupsManager" FunctionName="AgmModel.Store.spGroupsManager">
       <ResultMapping>
         <ComplexTypeMapping TypeName="AgmModel.spGroupsManager_Result">
@@ -98,10 +91,20 @@
           <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
           <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
           <ScalarProperty Name="managerId" ColumnName="managerId" />
+          <ScalarProperty Name="userFk" ColumnName="userFk" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="spGroupJoin" FunctionName="AgmModel.Store.spGroupJoin" />
+    <FunctionImportMapping FunctionImportName="spLeaveGroup" FunctionName="AgmModel.Store.spLeaveGroup" />
+    <FunctionImportMapping FunctionImportName="spUserGroup" FunctionName="AgmModel.Store.spUserGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AgmModel.spUserGroup_Result">
+          <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="groupName" ColumnName="groupName" />
+          <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="userGroupsUsidGrpid" FunctionName="AgmModel.Store.userGroupsUsidGrpid">
       <ResultMapping>
         <ComplexTypeMapping TypeName="AgmModel.userGroupsUsidGrpid_Result">

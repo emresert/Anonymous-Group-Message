@@ -28,11 +28,11 @@ namespace Agm.Models.EntityFramework
         public Nullable<int> managerFk { get; set; }
         public string groupCode { get; set; }
     
+        public virtual Manager Manager { get; set; }
         public virtual TextMessage TextMessage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistance> Asistance { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users> Users { get; set; }
-        public virtual Manager Manager { get; set; }
     }
 }

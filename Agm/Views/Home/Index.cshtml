@@ -45,6 +45,11 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.groupName)
                             </td>
+                            <td>
+                                <a class="leaveGroup" data-id=@item.groupId >
+                                    <i  class="fas fa-trash-alt" style="color:red;cursor:pointer;"></i>
+                                </a>
+                            </td>
                         </tr>
                      }
                  }

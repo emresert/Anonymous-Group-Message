@@ -14,7 +14,7 @@ namespace Agm.Controllers
 {
     public class UsersController : Controller
     {
-        AgmEntities db = new AgmEntities();
+        AgmEntities1 db = new AgmEntities1();
         
         public ActionResult Create()
         {

@@ -18,5 +18,6 @@ namespace Agm.Models.EntityFramework
         public string groupImageUrl { get; set; }
         public string managerNameSurname { get; set; }
         public int managerId { get; set; }
+        public Nullable<int> userFk { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace Agm.Controllers
 {
     public class HomeController : Controller
     {
-        AgmEntities db = new AgmEntities();
+        AgmEntities1 db = new AgmEntities1();
         public ActionResult Login()
         {
 
@@ -44,13 +44,14 @@ namespace Agm.Controllers
                return RedirectToAction("Login", "Home");
             }
 
-            var result = db.userGroups(user.userId).ToList();
+            var result = db.spUserGroup(user.userId).ToList();
             if (result.Count != 0 )
             {
                 var groupList = new List<groupsModel>();
                 foreach (var group in result)
                 {
                     var gModel = new groupsModel();
+                    gModel.groupId = group.groupId;
                     gModel.groupName = group.groupName;
                     gModel.groupImageUrl = group.groupImageUrl;
                     groupList.Add(gModel);

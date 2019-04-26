@@ -206,6 +206,7 @@
       <DependentUpon>AgmDB.edmx</DependentUpon>
     </Content>
     <None Include="scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="scripts\homeIndexScript.js" />
     <Content Include="scripts\jquery-3.0.0.js" />
     <Content Include="scripts\jquery-3.0.0.min.js" />
     <Content Include="scripts\jquery-3.0.0.slim.js" />
@@ -260,6 +261,9 @@
     <Compile Include="Models\EntityFramework\spGroupsManager_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFramework\spUserGroup_Result.cs">
+      <DependentUpon>AgmDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFramework\sysdiagrams.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
@@ -267,9 +271,6 @@
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\userGroupsUsidGrpid_Result.cs">
-      <DependentUpon>AgmDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityFramework\userGroups_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Users.cs">

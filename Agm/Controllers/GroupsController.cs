@@ -13,7 +13,7 @@ namespace Agm.Controllers
 {
     public class GroupsController : Controller
     {
-        AgmEntities db = new AgmEntities();
+        AgmEntities1 db = new AgmEntities1();
         
         public ActionResult Index()
         {
@@ -110,7 +110,7 @@ namespace Agm.Controllers
             }
             else
             {
-                ViewBag.NoResult = "Henüz herhangi bir grubunuz yok.";
+                ViewBag.NoResult = "Henüz yönetici olduğunuz herhangi bir grubunuz yok.";
             }
 
             return View();
@@ -149,6 +149,11 @@ namespace Agm.Controllers
         }
         public ActionResult Join()
         {
+            var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
 
             return View();
         }
@@ -176,7 +181,25 @@ namespace Agm.Controllers
             }
             return RedirectToAction("Index","Home");
         }
+       [HttpPost]
+        public string Leave(int id)
+        {
+            var user = Session["User"] as Users;
+            try
+            {
+                db.spLeaveGroup(user.userId,id);
+                db.SaveChanges();
+                return "1";
+            }
+            catch 
+            {
 
+                return "-1";
+            }
+
+         
+           
+        }
 
     }
 }

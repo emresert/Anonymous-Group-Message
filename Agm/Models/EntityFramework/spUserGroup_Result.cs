@@ -11,8 +11,9 @@ namespace Agm.Models.EntityFramework
 {
     using System;
     
-    public partial class userGroups_Result
+    public partial class spUserGroup_Result
     {
+        public int groupId { get; set; }
         public string groupName { get; set; }
         public string groupImageUrl { get; set; }
     }
