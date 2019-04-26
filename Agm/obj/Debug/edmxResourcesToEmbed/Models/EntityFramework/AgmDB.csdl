@@ -7,6 +7,10 @@
     <Property Name="asistanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="asistanceNameSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Groups" Relationship="Self.GroupAsistance" FromRole="Asistance" ToRole="Groups" />
+    <Property Name="managerFk" Type="Int32" />
+    <NavigationProperty Name="Manager" Relationship="AgmModel.FK_Asistance_Manager" FromRole="Asistance" ToRole="Manager" />
+    <Property Name="userFk" Type="Int32" />
+    <NavigationProperty Name="Users" Relationship="AgmModel.FK_Asistance_Users" FromRole="Asistance" ToRole="Users" />
   </EntityType>
   <EntityType Name="Groups">
     <Key>
@@ -32,6 +36,7 @@
     <Property Name="userFk" Type="Int32" />
     <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_Manager" FromRole="Manager" ToRole="Groups" />
     <NavigationProperty Name="Users" Relationship="Self.FK_Manager_Users" FromRole="Manager" ToRole="Users" />
+    <NavigationProperty Name="Asistance" Relationship="AgmModel.FK_Asistance_Manager" FromRole="Manager" ToRole="Asistance" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -67,6 +72,7 @@
     <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Manager" Relationship="Self.FK_Manager_Users" FromRole="Users" ToRole="Manager" />
     <NavigationProperty Name="Groups" Relationship="Self.UsersGroup" FromRole="Users" ToRole="Groups" />
+    <NavigationProperty Name="Asistance" Relationship="AgmModel.FK_Asistance_Users" FromRole="Users" ToRole="Asistance" />
   </EntityType>
   <Association Name="FK_Groups_Manager">
     <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
@@ -161,6 +167,21 @@
       <Parameter Name="id" Mode="In" Type="Int32" />
       <Parameter Name="groupid" Mode="In" Type="Int32" />
     </FunctionImport>
+    <AssociationSet Name="FK_Asistance_Manager" Association="AgmModel.FK_Asistance_Manager">
+      <End Role="Manager" EntitySet="Manager" />
+      <End Role="Asistance" EntitySet="Asistance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asistance_Users" Association="AgmModel.FK_Asistance_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Asistance" EntitySet="Asistance" />
+    </AssociationSet>
+    <FunctionImport Name="spAddAsistance">
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+      <Parameter Name="asistanceUserLoginName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spAsistanceOfManager" ReturnType="Collection(AgmModel.spAsistanceOfManager_Result)">
+      <Parameter Name="managerId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="spGroupsManager_Result">
     <Property Type="Int32" Name="groupId" Nullable="false" />
@@ -179,5 +200,40 @@
     <Property Type="Int32" Name="groupId" Nullable="false" />
     <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
     <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <Association Name="FK_Asistance_Manager">
+    <End Type="AgmModel.Manager" Role="Manager" Multiplicity="0..1" />
+    <End Type="AgmModel.Asistance" Role="Asistance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="managerId" />
+      </Principal>
+      <Dependent Role="Asistance">
+        <PropertyRef Name="managerFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asistance_Users">
+    <End Type="AgmModel.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="AgmModel.Asistance" Role="Asistance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Asistance">
+        <PropertyRef Name="userFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="spAsistanceOfManager_Result">
+    <Property Type="String" Name="asistanceNameSurname" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="asistanceId" Nullable="false" />
+    <Property Type="Int32" Name="groupId" Nullable="false" />
+    <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
+    <Property Type="Int32" Name="managerId" Nullable="false" />
+    <Property Type="Int32" Name="userId" Nullable="false" />
+    <Property Type="String" Name="userNameSurname" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
   </ComplexType>
 </Schema>

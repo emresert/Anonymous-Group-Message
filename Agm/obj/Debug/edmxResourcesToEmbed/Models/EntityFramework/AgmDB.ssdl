@@ -6,6 +6,8 @@
     </Key>
     <Property Name="asistanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="asistanceNameSurname" Type="nvarchar" MaxLength="100" />
+    <Property Name="managerFk" Type="int" />
+    <Property Name="userFk" Type="int" />
   </EntityType>
   <EntityType Name="GroupAsistance">
     <Key>
@@ -74,6 +76,30 @@
     <Property Name="usersFk" Type="int" Nullable="false" />
     <Property Name="groupFk" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Asistance_Manager">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+    <End Role="Asistance" Type="Self.Asistance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="managerId" />
+      </Principal>
+      <Dependent Role="Asistance">
+        <PropertyRef Name="managerFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asistance_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Asistance" Type="Self.Asistance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Asistance">
+        <PropertyRef Name="userFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_GroupAsistance_Asistance">
     <End Role="Asistance" Type="Self.Asistance" Multiplicity="1" />
     <End Role="GroupAsistance" Type="Self.GroupAsistance" Multiplicity="*" />
@@ -158,9 +184,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="spAddAsistance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="asistanceUserLoginName" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="spAddUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userFk" Type="int" Mode="In" />
     <Parameter Name="groupFk" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spAsistanceOfManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="managerId" Type="int" Mode="In" />
   </Function>
   <Function Name="spGroupJoin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userId" Type="int" Mode="In" />
@@ -189,6 +222,14 @@
     <EntitySet Name="TextMessage" EntityType="Self.TextMessage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersGroup" EntityType="Self.UsersGroup" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Asistance_Manager" Association="Self.FK_Asistance_Manager">
+      <End Role="Manager" EntitySet="Manager" />
+      <End Role="Asistance" EntitySet="Asistance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asistance_Users" Association="Self.FK_Asistance_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Asistance" EntitySet="Asistance" />
+    </AssociationSet>
     <AssociationSet Name="FK_GroupAsistance_Asistance" Association="Self.FK_GroupAsistance_Asistance">
       <End Role="Asistance" EntitySet="Asistance" />
       <End Role="GroupAsistance" EntitySet="GroupAsistance" />

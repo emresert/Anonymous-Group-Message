@@ -69,6 +69,10 @@ namespace Agm.Controllers
                 file.SaveAs(imgPath);
                 group.groupImageUrl = "/Group_Images/" + file.FileName;
             }
+            else if (file == null)
+            {
+                group.groupImageUrl = "/Group_Images/default.png";
+            }
             var control = db.Manager.FirstOrDefault(c => c.userFk == user.userId);
             if (control == null) {
                 manager.managerNameSurname = user.userNameSurname;
@@ -144,6 +148,7 @@ namespace Agm.Controllers
                     file.SaveAs(imgPath);
                     change.groupImageUrl = "/Group_Images/" + file.FileName;
                 }
+          
             db.SaveChanges();
             return RedirectToAction("EditIndex","Groups");
         }
@@ -198,11 +203,40 @@ namespace Agm.Controllers
             {
 
                 return "-1";
-            }
-
-         
-           
+            }   
         }
 
+        public ActionResult AsistanceIndex()
+        {
+            var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var manager = db.Manager.FirstOrDefault(m => m.userFk == user.userId);
+
+            var result = db.spAsistanceOfManager(manager.managerId).ToList();
+            if (result.Count != 0)
+            {
+                var asistanceList = new List<asistanceModel>();
+                foreach (var asistance in result)
+                {
+                    var aModel = new asistanceModel();
+                    aModel.asistanceId = asistance.asistanceId;
+                    aModel.asistanceNameSurname = asistance.asistanceNameSurname;
+                    aModel.asistanceImgUrl = asistance.userImageUrl;
+                    aModel.asistanceGroupName = asistance.groupName;
+
+                    asistanceList.Add(aModel);
+                }
+                return View(asistanceList);
+            }
+            else
+            {
+                ViewBag.NoResult = "Henüz asistanınız yok.";
+            }
+
+            return View();
+        }
     }
 }

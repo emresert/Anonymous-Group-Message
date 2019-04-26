@@ -231,6 +231,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Class\asistanceModel.cs" />
     <Compile Include="Models\Class\groupsModel.cs" />
     <Compile Include="Models\Class\usersgroupModel.cs" />
     <Compile Include="Models\Class\usersModel.cs" />
@@ -256,6 +257,9 @@
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\Manager.cs">
+      <DependentUpon>AgmDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\spAsistanceOfManager_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\spGroupsManager_Result.cs">
@@ -306,6 +310,7 @@
     <Content Include="Views\Groups\EditIndex.cshtml" />
     <Content Include="Views\Groups\Edit.cshtml" />
     <Content Include="Views\Groups\Join.cshtml" />
+    <Content Include="Views\Groups\AsistanceIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

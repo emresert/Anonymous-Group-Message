@@ -103,5 +103,27 @@ namespace Agm.Models.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<userGroupsUsidGrpid_Result>("userGroupsUsidGrpid", idParameter, groupidParameter);
         }
+    
+        public virtual int spAddAsistance(Nullable<int> userId, string asistanceUserLoginName)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var asistanceUserLoginNameParameter = asistanceUserLoginName != null ?
+                new ObjectParameter("asistanceUserLoginName", asistanceUserLoginName) :
+                new ObjectParameter("asistanceUserLoginName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddAsistance", userIdParameter, asistanceUserLoginNameParameter);
+        }
+    
+        public virtual ObjectResult<spAsistanceOfManager_Result> spAsistanceOfManager(Nullable<int> managerId)
+        {
+            var managerIdParameter = managerId.HasValue ?
+                new ObjectParameter("managerId", managerId) :
+                new ObjectParameter("managerId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAsistanceOfManager_Result>("spAsistanceOfManager", managerIdParameter);
+        }
     }
 }
