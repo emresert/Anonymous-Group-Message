@@ -1,51 +1,30 @@
-﻿@model Agm.Models.Class.groupsModel
+﻿
+@model Agm.Models.Class.groupsModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_UserIndex.cshtml";
 }
-
-<h2>Edit</h2>
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Groups</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.groupId)
+    @Html.HiddenFor(model => model.groupId)
+    <div class="container createGroupContainer">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.groupName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.groupName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.groupName, "", new { @class = "text-danger" })
-            </div>
+        <div class="form-group createFormGroup">
+            <label for="exampleInputEmail1"><b>Grup Adı</b></label>
+            @Html.EditorFor(model => model.groupName, new { htmlAttributes = new { @class = "form-control", placeholder = "Lütfen bir grup adı giriniz" } })
+            <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.groupName, "", new { @class = "text-danger" })</small>
         </div>
-
-       
-
-        <div class="form-group">
-            
-            <div class="col-md-10">
-                <input type="file" name="file" />
-                @Html.ValidationMessageFor(model => model.groupImageUrl, "", new { @class = "text-danger" })
-            </div>
+        <div class="form-group createFormGroup">
+            <label for="exampleFormControlFile1"><b>Grup Resmi</b></label>
+            <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" />
+            <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.groupImageUrl, "", new { @class = "text-danger" })</small>
         </div>
+        <button type="submit" class="btn btn-primary createFormBtn">
+            Oluştur
+        </button>
 
-       
-       
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

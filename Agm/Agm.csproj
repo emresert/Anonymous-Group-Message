@@ -150,6 +150,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\groupCreate.css" />
     <Content Include="Content\groupIndex.css" />
     <Content Include="Content\homeIndex.css" />
     <Content Include="Content\navbarIndex.css" />
@@ -268,9 +269,6 @@
     <Compile Include="Models\EntityFramework\spUserGroup_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFramework\sysdiagrams.cs">
-      <DependentUpon>AgmDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EntityFramework\TextMessage.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
@@ -311,6 +309,7 @@
     <Content Include="Views\Groups\Edit.cshtml" />
     <Content Include="Views\Groups\Join.cshtml" />
     <Content Include="Views\Groups\AsistanceIndex.cshtml" />
+    <Content Include="Views\Groups\CreateAsistance.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -7,15 +7,15 @@
 <div>
    @Html.ActionLink("Geri Dön", "Login", "Home", new { @class = "badge badge-primary"} )
 </div>
-@Html.Raw(TempData["msg"]);
+@Html.Raw(TempData["msg"])
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="container formContainer">
+    <div class="container">
         <!-- Sign up card -->
         <div class="card person-card">
             <div class="card-body">
-                <!-- Sex image -->
+                
                 <img id="img_sex" class="person-img"
                      src="~/User_Images/default2.png">
                 <h2 id="who_message" class="card-title">Kişisel Bilgiler</h2>
@@ -92,15 +92,16 @@
                     <div class="card-body">
 
                         <label for="password" class="col-form-label">Profil Resmi</label><br />
-                        <input type="file" name="file" />
+                        <input type="file" name="file" style="width:100% !important"/>
+                        <br />
                         @Html.ValidationMessageFor(model => model.userImageUrl, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
             </div>
         <div style="margin-top: 1em;">
-
-            <input type="submit" value="Kaydol" class="btn btn-primary btn-lg btn-block" id="create-button" />
+            
+            <input type="submit" value="Kaydol" class="btn btn-primary btn-lg btn-block"/>
             <br />
             <br />
         </div>

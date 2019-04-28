@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "CreateAsistance";
+    Layout = "~/Views/Shared/_UserIndex.cshtml";
+}
+@Html.Raw(TempData["msg"])
+@using (Html.BeginForm("CreateAsistance", "Groups", FormMethod.Post))
+{
+
+    <div class="container createGroupContainer">
+
+        <div class="form-group createFormGroup">
+            <label for="exampleInputEmail1">Asistan Atanacak Grubun Kodu</label>
+            <input type="text" name="inputGroupCode" class="form-control" />
+
+        </div>
+        <div class="form-group createFormGroup">
+            <label for="exampleFormControlFile1">Asistanın Kullanıcı Adı</label>
+            <input type="text" name="userLoginName" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary createFormBtn">
+            Ata
+        </button>
+    </div>
+
+}

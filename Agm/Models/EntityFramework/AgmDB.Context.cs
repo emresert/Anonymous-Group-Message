@@ -15,10 +15,10 @@ namespace Agm.Models.EntityFramework
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class AgmEntities1 : DbContext
+    public partial class AgmEntities : DbContext
     {
-        public AgmEntities1()
-            : base("name=AgmEntities1")
+        public AgmEntities()
+            : base("name=AgmEntities")
         {
         }
     
@@ -30,9 +30,34 @@ namespace Agm.Models.EntityFramework
         public virtual DbSet<Asistance> Asistance { get; set; }
         public virtual DbSet<Groups> Groups { get; set; }
         public virtual DbSet<Manager> Manager { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TextMessage> TextMessage { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+    
+        public virtual int spAddAsistance(Nullable<int> userId, string asistanceUserLoginName)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var asistanceUserLoginNameParameter = asistanceUserLoginName != null ?
+                new ObjectParameter("asistanceUserLoginName", asistanceUserLoginName) :
+                new ObjectParameter("asistanceUserLoginName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddAsistance", userIdParameter, asistanceUserLoginNameParameter);
+        }
+    
+        public virtual int spAddAsistanceWithOrder(Nullable<int> userId, string asistanceUserLoginName)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("userId", userId) :
+                new ObjectParameter("userId", typeof(int));
+    
+            var asistanceUserLoginNameParameter = asistanceUserLoginName != null ?
+                new ObjectParameter("asistanceUserLoginName", asistanceUserLoginName) :
+                new ObjectParameter("asistanceUserLoginName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddAsistanceWithOrder", userIdParameter, asistanceUserLoginNameParameter);
+        }
     
         public virtual int spAddUserGroups(Nullable<int> userFk, Nullable<int> groupFk)
         {
@@ -45,6 +70,15 @@ namespace Agm.Models.EntityFramework
                 new ObjectParameter("groupFk", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddUserGroups", userFkParameter, groupFkParameter);
+        }
+    
+        public virtual ObjectResult<spAsistanceOfManager_Result> spAsistanceOfManager(Nullable<int> managerId)
+        {
+            var managerIdParameter = managerId.HasValue ?
+                new ObjectParameter("managerId", managerId) :
+                new ObjectParameter("managerId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAsistanceOfManager_Result>("spAsistanceOfManager", managerIdParameter);
         }
     
         public virtual int spGroupJoin(Nullable<int> userId, Nullable<int> groupId)
@@ -102,28 +136,6 @@ namespace Agm.Models.EntityFramework
                 new ObjectParameter("groupid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<userGroupsUsidGrpid_Result>("userGroupsUsidGrpid", idParameter, groupidParameter);
-        }
-    
-        public virtual int spAddAsistance(Nullable<int> userId, string asistanceUserLoginName)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("userId", userId) :
-                new ObjectParameter("userId", typeof(int));
-    
-            var asistanceUserLoginNameParameter = asistanceUserLoginName != null ?
-                new ObjectParameter("asistanceUserLoginName", asistanceUserLoginName) :
-                new ObjectParameter("asistanceUserLoginName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddAsistance", userIdParameter, asistanceUserLoginNameParameter);
-        }
-    
-        public virtual ObjectResult<spAsistanceOfManager_Result> spAsistanceOfManager(Nullable<int> managerId)
-        {
-            var managerIdParameter = managerId.HasValue ?
-                new ObjectParameter("managerId", managerId) :
-                new ObjectParameter("managerId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAsistanceOfManager_Result>("spAsistanceOfManager", managerIdParameter);
         }
     }
 }

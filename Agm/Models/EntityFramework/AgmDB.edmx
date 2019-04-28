@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AgmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AgmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asistance">
           <Key>
             <PropertyRef Name="asistanceId" />
@@ -40,16 +40,6 @@
           <Property Name="managerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="managerNameSurname" Type="nvarchar" MaxLength="100" />
           <Property Name="userFk" Type="int" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TextMessage">
           <Key>
@@ -193,6 +183,10 @@
           <Parameter Name="userId" Type="int" Mode="In" />
           <Parameter Name="asistanceUserLoginName" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="spAddAsistanceWithOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="asistanceUserLoginName" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="spAddUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userFk" Type="int" Mode="In" />
           <Parameter Name="groupFk" Type="int" Mode="In" />
@@ -223,7 +217,6 @@
           <EntitySet Name="GroupAsistance" EntityType="Self.GroupAsistance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TextMessage" EntityType="Self.TextMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersGroup" EntityType="Self.UsersGroup" Schema="dbo" store:Type="Tables" />
@@ -264,7 +257,8 @@
             <End Role="UsersGroup" EntitySet="UsersGroup" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AgmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -274,11 +268,11 @@
           </Key>
           <Property Name="asistanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="asistanceNameSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Groups" Relationship="Self.GroupAsistance" FromRole="Asistance" ToRole="Groups" />
           <Property Name="managerFk" Type="Int32" />
-          <NavigationProperty Name="Manager" Relationship="AgmModel.FK_Asistance_Manager" FromRole="Asistance" ToRole="Manager" />
           <Property Name="userFk" Type="Int32" />
-          <NavigationProperty Name="Users" Relationship="AgmModel.FK_Asistance_Users" FromRole="Asistance" ToRole="Users" />
+          <NavigationProperty Name="Manager" Relationship="Self.FK_Asistance_Manager" FromRole="Asistance" ToRole="Manager" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Asistance_Users" FromRole="Asistance" ToRole="Users" />
+          <NavigationProperty Name="Groups" Relationship="Self.GroupAsistance" FromRole="Asistance" ToRole="Groups" />
         </EntityType>
         <EntityType Name="Groups">
           <Key>
@@ -302,19 +296,9 @@
           <Property Name="managerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="managerNameSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="userFk" Type="Int32" />
+          <NavigationProperty Name="Asistance" Relationship="Self.FK_Asistance_Manager" FromRole="Manager" ToRole="Asistance" />
           <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_Manager" FromRole="Manager" ToRole="Groups" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Manager_Users" FromRole="Manager" ToRole="Users" />
-          <NavigationProperty Name="Asistance" Relationship="AgmModel.FK_Asistance_Manager" FromRole="Manager" ToRole="Asistance" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TextMessage">
           <Key>
@@ -338,10 +322,34 @@
           <Property Name="userPassword" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="userImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="userEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Asistance" Relationship="Self.FK_Asistance_Users" FromRole="Users" ToRole="Asistance" />
           <NavigationProperty Name="Manager" Relationship="Self.FK_Manager_Users" FromRole="Users" ToRole="Manager" />
           <NavigationProperty Name="Groups" Relationship="Self.UsersGroup" FromRole="Users" ToRole="Groups" />
-          <NavigationProperty Name="Asistance" Relationship="AgmModel.FK_Asistance_Users" FromRole="Users" ToRole="Asistance" />
         </EntityType>
+        <Association Name="FK_Asistance_Manager">
+          <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+          <End Role="Asistance" Type="Self.Asistance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="managerId" />
+            </Principal>
+            <Dependent Role="Asistance">
+              <PropertyRef Name="managerFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asistance_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Asistance" Type="Self.Asistance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="Asistance">
+              <PropertyRef Name="userFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Groups_Manager">
           <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
           <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
@@ -386,13 +394,20 @@
           <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="AgmEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AgmEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Asistance" EntityType="Self.Asistance" />
           <EntitySet Name="Groups" EntityType="Self.Groups" />
           <EntitySet Name="Manager" EntityType="Self.Manager" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TextMessage" EntityType="Self.TextMessage" />
           <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Asistance_Manager" Association="Self.FK_Asistance_Manager">
+            <End Role="Manager" EntitySet="Manager" />
+            <End Role="Asistance" EntitySet="Asistance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asistance_Users" Association="Self.FK_Asistance_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Asistance" EntitySet="Asistance" />
+          </AssociationSet>
           <AssociationSet Name="FK_Groups_Manager" Association="Self.FK_Groups_Manager">
             <End Role="Manager" EntitySet="Manager" />
             <End Role="Groups" EntitySet="Groups" />
@@ -413,48 +428,56 @@
             <End Role="Groups" EntitySet="Groups" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <FunctionImport Name="spAddAsistance">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="asistanceUserLoginName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spAddAsistanceWithOrder">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="asistanceUserLoginName" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="spAddUserGroups">
             <Parameter Name="userFk" Mode="In" Type="Int32" />
             <Parameter Name="groupFk" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAsistanceOfManager" ReturnType="Collection(AgmModel.spAsistanceOfManager_Result)">
+            <Parameter Name="managerId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGroupJoin">
             <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="groupId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGroupsManager" ReturnType="Collection(AgmModel.spGroupsManager_Result)">
-          <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spLeaveGroup">
             <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="groupId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spUserGroup" ReturnType="Collection(AgmModel.spUserGroup_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="userGroupsUsidGrpid" ReturnType="Collection(AgmModel.userGroupsUsidGrpid_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="groupid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <AssociationSet Name="FK_Asistance_Manager" Association="AgmModel.FK_Asistance_Manager">
-            <End Role="Manager" EntitySet="Manager" />
-            <End Role="Asistance" EntitySet="Asistance" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Asistance_Users" Association="AgmModel.FK_Asistance_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Asistance" EntitySet="Asistance" />
-          </AssociationSet>
-          <FunctionImport Name="spAddAsistance">
-            <Parameter Name="userId" Mode="In" Type="Int32" />
-            <Parameter Name="asistanceUserLoginName" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="spAsistanceOfManager" ReturnType="Collection(AgmModel.spAsistanceOfManager_Result)">
-            <Parameter Name="managerId" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="spAsistanceOfManager_Result">
+          <Property Type="String" Name="asistanceNameSurname" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="asistanceId" Nullable="false" />
+          <Property Type="Int32" Name="groupId" Nullable="false" />
+          <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="managerId" Nullable="false" />
+          <Property Type="Int32" Name="userId" Nullable="false" />
+          <Property Type="String" Name="userNameSurname" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
+        </ComplexType>
         <ComplexType Name="spGroupsManager_Result">
           <Property Type="Int32" Name="groupId" Nullable="false" />
           <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="groupCode" Nullable="true" MaxLength="8" />
           <Property Type="String" Name="managerNameSurname" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="managerId" Nullable="false" />
           <Property Type="Int32" Name="userFk" Nullable="true" />
@@ -469,54 +492,19 @@
           <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
         </ComplexType>
-        <Association Name="FK_Asistance_Manager">
-          <End Type="AgmModel.Manager" Role="Manager" Multiplicity="0..1" />
-          <End Type="AgmModel.Asistance" Role="Asistance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Manager">
-              <PropertyRef Name="managerId" />
-            </Principal>
-            <Dependent Role="Asistance">
-              <PropertyRef Name="managerFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Asistance_Users">
-          <End Type="AgmModel.Users" Role="Users" Multiplicity="0..1" />
-          <End Type="AgmModel.Asistance" Role="Asistance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="Asistance">
-              <PropertyRef Name="userFk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="spAsistanceOfManager_Result">
-          <Property Type="String" Name="asistanceNameSurname" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="asistanceId" Nullable="false" />
-          <Property Type="Int32" Name="groupId" Nullable="false" />
-          <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="managerId" Nullable="false" />
-          <Property Type="Int32" Name="userId" Nullable="false" />
-          <Property Type="String" Name="userNameSurname" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AgmModelStoreContainer" CdmEntityContainer="AgmEntities1">
+        <EntityContainerMapping StorageEntityContainer="AgmModelStoreContainer" CdmEntityContainer="AgmEntities">
           <EntitySetMapping Name="Asistance">
             <EntityTypeMapping TypeName="AgmModel.Asistance">
               <MappingFragment StoreEntitySet="Asistance">
-                <ScalarProperty Name="userFk" ColumnName="userFk" />
-                <ScalarProperty Name="managerFk" ColumnName="managerFk" />
                 <ScalarProperty Name="asistanceId" ColumnName="asistanceId" />
                 <ScalarProperty Name="asistanceNameSurname" ColumnName="asistanceNameSurname" />
+                <ScalarProperty Name="managerFk" ColumnName="managerFk" />
+                <ScalarProperty Name="userFk" ColumnName="userFk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -538,17 +526,6 @@
                 <ScalarProperty Name="managerId" ColumnName="managerId" />
                 <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
                 <ScalarProperty Name="userFk" ColumnName="userFk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="AgmModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -592,7 +569,24 @@
               <ScalarProperty Name="userId" ColumnName="usersFk" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="spAddAsistance" FunctionName="AgmModel.Store.spAddAsistance" />
+          <FunctionImportMapping FunctionImportName="spAddAsistanceWithOrder" FunctionName="AgmModel.Store.spAddAsistanceWithOrder" />
           <FunctionImportMapping FunctionImportName="spAddUserGroups" FunctionName="AgmModel.Store.spAddUserGroups" />
+          <FunctionImportMapping FunctionImportName="spAsistanceOfManager" FunctionName="AgmModel.Store.spAsistanceOfManager">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AgmModel.spAsistanceOfManager_Result">
+                <ScalarProperty Name="asistanceNameSurname" ColumnName="asistanceNameSurname" />
+                <ScalarProperty Name="asistanceId" ColumnName="asistanceId" />
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="groupName" ColumnName="groupName" />
+                <ScalarProperty Name="managerId" ColumnName="managerId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userNameSurname" ColumnName="userNameSurname" />
+                <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
+                <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spGroupJoin" FunctionName="AgmModel.Store.spGroupJoin" />
           <FunctionImportMapping FunctionImportName="spGroupsManager" FunctionName="AgmModel.Store.spGroupsManager">
             <ResultMapping>
@@ -600,6 +594,7 @@
                 <ScalarProperty Name="groupId" ColumnName="groupId" />
                 <ScalarProperty Name="groupName" ColumnName="groupName" />
                 <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
+                <ScalarProperty Name="groupCode" ColumnName="groupCode" />
                 <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
                 <ScalarProperty Name="managerId" ColumnName="managerId" />
                 <ScalarProperty Name="userFk" ColumnName="userFk" />
@@ -622,22 +617,6 @@
                 <ScalarProperty Name="groupId" ColumnName="groupId" />
                 <ScalarProperty Name="groupName" ColumnName="groupName" />
                 <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spAddAsistance" FunctionName="AgmModel.Store.spAddAsistance" />
-          <FunctionImportMapping FunctionImportName="spAsistanceOfManager" FunctionName="AgmModel.Store.spAsistanceOfManager">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AgmModel.spAsistanceOfManager_Result">
-                <ScalarProperty Name="asistanceNameSurname" ColumnName="asistanceNameSurname" />
-                <ScalarProperty Name="asistanceId" ColumnName="asistanceId" />
-                <ScalarProperty Name="groupId" ColumnName="groupId" />
-                <ScalarProperty Name="groupName" ColumnName="groupName" />
-                <ScalarProperty Name="managerId" ColumnName="managerId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="userNameSurname" ColumnName="userNameSurname" />
-                <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
-                <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

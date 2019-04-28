@@ -13,7 +13,7 @@ namespace Agm.Controllers
 {
     public class GroupsController : Controller
     {
-        AgmEntities1 db = new AgmEntities1();
+        AgmEntities db = new AgmEntities();
         
         public ActionResult Index()
         {
@@ -214,29 +214,120 @@ namespace Agm.Controllers
                 return RedirectToAction("Login", "Home");
             }
             var manager = db.Manager.FirstOrDefault(m => m.userFk == user.userId);
-
-            var result = db.spAsistanceOfManager(manager.managerId).ToList();
-            if (result.Count != 0)
+            if (manager == null)
             {
-                var asistanceList = new List<asistanceModel>();
-                foreach (var asistance in result)
-                {
-                    var aModel = new asistanceModel();
-                    aModel.asistanceId = asistance.asistanceId;
-                    aModel.asistanceNameSurname = asistance.asistanceNameSurname;
-                    aModel.asistanceImgUrl = asistance.userImageUrl;
-                    aModel.asistanceGroupName = asistance.groupName;
-
-                    asistanceList.Add(aModel);
-                }
-                return View(asistanceList);
+                TempData["msg"] = "<script>alert('Önce yönetici olarak bir grup kurmalısınız.')</script>";
+                return RedirectToAction("Index", "Groups");
             }
             else
             {
-                ViewBag.NoResult = "Henüz asistanınız yok.";
+                var result = db.spAsistanceOfManager(manager.managerId).ToList();
+                if (result.Count != 0)
+                {
+                    var asistanceList = new List<asistanceModel>();
+                    foreach (var asistance in result)
+                    {
+                        var aModel = new asistanceModel();
+                        aModel.asistanceId = asistance.asistanceId;
+                        aModel.asistanceNameSurname = asistance.asistanceNameSurname;
+                        aModel.asistanceImgUrl = asistance.userImageUrl;
+                        aModel.asistanceGroupName = asistance.groupName;
+
+                        asistanceList.Add(aModel);
+                    }
+                    return View(asistanceList);
+                }
+                else
+                {
+                    ViewBag.NoResult = "Henüz asistanınız yok.";
+                }
+
             }
+          
 
             return View();
         }
+
+        public ActionResult CreateAsistance()
+        {
+            var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateAsistance(string userLoginName,string inputGroupCode)
+        {
+            var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var manager = db.Manager.FirstOrDefault(m => m.userFk == user.userId);
+            if (manager == null)
+            {
+                TempData["msg"] = "<script>alert('Önce yönetici olarak bir grup kurmalısınız.')</script>";
+                return View();
+            }
+            var groupList = new List<groupsModel>();
+            var groupManager = db.spGroupsManager(user.userId).ToList();
+            if (groupManager.Count != 0)
+            {
+             
+                foreach (var group in groupManager)
+                {
+                    var gModel = new groupsModel();
+                    gModel.groupId = group.groupId;
+                    gModel.groupName = group.groupName;
+                    gModel.groupImageUrl = group.groupImageUrl;
+                    gModel.groupCode = group.groupCode;
+                    groupList.Add(gModel);
+                }   
+            }
+            var Agroup = groupList.FirstOrDefault(g=>g.groupCode==inputGroupCode);
+            if (Agroup == null)
+            {
+                TempData["msg"] = "<script>alert('Böyle bir grubunuz yok.Lütfen doğru bir grup kodunuzu giriniz.')</script>";
+                return View();
+            }
+            var userLog = db.Users.FirstOrDefault(u => u.userLoginName == userLoginName);
+            if (userLog == null)
+            {
+                TempData["msg"] = "<script>alert('Böyle bir kullanıcı yok.Lütfen doğru bir kulanıcı adı giriniz.')</script>";
+                return View();
+            }
+
+
+            var control = db.userGroupsUsidGrpid(userLog.userId, Agroup.groupId).ToList(); 
+            if (control.Count==0)
+            {
+                TempData["msg"] = "<script>alert('Yalnızca girdiğiniz grubun Listesindeki kişilerden asistan seçebilirsiniz.')</script>";
+                return View();
+            }
+            else if (control.Count != 0)
+            {
+                try
+                {
+
+                    //db.spAddAsistanceWithOrder(user.userId, userLog.userLoginName);
+                    db.spAddAsistance(user.userId, userLog.userLoginName);
+                    db.SaveChanges();
+                        TempData["msg"] = "<script>alert('Asistan grubunuza eklendi.')</script>";
+                        return RedirectToAction("AsistanceIndex","Groups");
+                }
+                catch 
+                {
+
+                    TempData["msg"] = "<script>alert('İşlem sırasında bir hata oluştu.Bu kişi grubunuzun asistanı olabilir ya da henüz grubunuza üye değil.')</script>";
+                    return View();
+                }
+            }
+            
+            
+            return View();
+        }
+
     }
 }

@@ -11,9 +11,11 @@ namespace Agm.Controllers
 {
     public class HomeController : Controller
     {
-        AgmEntities1 db = new AgmEntities1();
+        AgmEntities db = new AgmEntities();
         public ActionResult Login()
         {
+            var user = Session["User"] as Users;
+            user = null;
 
             return View();
         }

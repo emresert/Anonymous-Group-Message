@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="AgmModelStoreContainer" CdmEntityContainer="AgmEntities1">
+  <EntityContainerMapping StorageEntityContainer="AgmModelStoreContainer" CdmEntityContainer="AgmEntities">
     <EntitySetMapping Name="Asistance">
       <EntityTypeMapping TypeName="AgmModel.Asistance">
         <MappingFragment StoreEntitySet="Asistance">
-          <ScalarProperty Name="userFk" ColumnName="userFk" />
-          <ScalarProperty Name="managerFk" ColumnName="managerFk" />
           <ScalarProperty Name="asistanceId" ColumnName="asistanceId" />
           <ScalarProperty Name="asistanceNameSurname" ColumnName="asistanceNameSurname" />
+          <ScalarProperty Name="managerFk" ColumnName="managerFk" />
+          <ScalarProperty Name="userFk" ColumnName="userFk" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -29,17 +29,6 @@
           <ScalarProperty Name="managerId" ColumnName="managerId" />
           <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
           <ScalarProperty Name="userFk" ColumnName="userFk" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="AgmModel.sysdiagrams">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -83,7 +72,24 @@
         <ScalarProperty Name="userId" ColumnName="usersFk" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="spAddAsistance" FunctionName="AgmModel.Store.spAddAsistance" />
+    <FunctionImportMapping FunctionImportName="spAddAsistanceWithOrder" FunctionName="AgmModel.Store.spAddAsistanceWithOrder" />
     <FunctionImportMapping FunctionImportName="spAddUserGroups" FunctionName="AgmModel.Store.spAddUserGroups" />
+    <FunctionImportMapping FunctionImportName="spAsistanceOfManager" FunctionName="AgmModel.Store.spAsistanceOfManager">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AgmModel.spAsistanceOfManager_Result">
+          <ScalarProperty Name="asistanceNameSurname" ColumnName="asistanceNameSurname" />
+          <ScalarProperty Name="asistanceId" ColumnName="asistanceId" />
+          <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="groupName" ColumnName="groupName" />
+          <ScalarProperty Name="managerId" ColumnName="managerId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userNameSurname" ColumnName="userNameSurname" />
+          <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
+          <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="spGroupJoin" FunctionName="AgmModel.Store.spGroupJoin" />
     <FunctionImportMapping FunctionImportName="spGroupsManager" FunctionName="AgmModel.Store.spGroupsManager">
       <ResultMapping>
@@ -91,6 +97,7 @@
           <ScalarProperty Name="groupId" ColumnName="groupId" />
           <ScalarProperty Name="groupName" ColumnName="groupName" />
           <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
+          <ScalarProperty Name="groupCode" ColumnName="groupCode" />
           <ScalarProperty Name="managerNameSurname" ColumnName="managerNameSurname" />
           <ScalarProperty Name="managerId" ColumnName="managerId" />
           <ScalarProperty Name="userFk" ColumnName="userFk" />
@@ -113,22 +120,6 @@
           <ScalarProperty Name="groupId" ColumnName="groupId" />
           <ScalarProperty Name="groupName" ColumnName="groupName" />
           <ScalarProperty Name="groupImageUrl" ColumnName="groupImageUrl" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="spAddAsistance" FunctionName="AgmModel.Store.spAddAsistance" />
-    <FunctionImportMapping FunctionImportName="spAsistanceOfManager" FunctionName="AgmModel.Store.spAsistanceOfManager">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="AgmModel.spAsistanceOfManager_Result">
-          <ScalarProperty Name="asistanceNameSurname" ColumnName="asistanceNameSurname" />
-          <ScalarProperty Name="asistanceId" ColumnName="asistanceId" />
-          <ScalarProperty Name="groupId" ColumnName="groupId" />
-          <ScalarProperty Name="groupName" ColumnName="groupName" />
-          <ScalarProperty Name="managerId" ColumnName="managerId" />
-          <ScalarProperty Name="userId" ColumnName="userId" />
-          <ScalarProperty Name="userNameSurname" ColumnName="userNameSurname" />
-          <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
-          <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

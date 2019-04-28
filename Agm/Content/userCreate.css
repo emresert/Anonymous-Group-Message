@@ -1,24 +1,26 @@
 ﻿/* User Create Part*/
 
-.formContainer{
-    width:65% !important;
+body{
+    margin:auto!important;
+    height:100% !important;
 }
 .person-card {
-    margin-top: 8em;
+    margin-top: 4em !important;
     padding-top: 5em;
     background-color:whitesmoke !important;
     
     
 }
 .person-card .card-title{
+    margin-top:-1em!important;
     text-align: center;
 }
 .person-img{
-    width: 12.5em;
-    height:12.5em;
+    width: 8em;
+    height:8em;
     position: absolute;
-    top: -7.5em;
-    left: 45%;
+    top: -4.5em;
+    left:4em;
     margin-left: -3em;
     padding-left:0px;
     border:7px solid white !important;
@@ -31,15 +33,7 @@
     background-color:whitesmoke;
     
 }
-#create-button{
-    background:rgb(255, 106, 0);
-			color: white !important;
-            border:2px lightgray solid;
-}
-#create-button:focus {
-			box-shadow: none !important;
-			outline: 0px !important;
-		}
+
 .badge{
     margin:1% !important;
     padding:1% !important;
