@@ -60,7 +60,16 @@ namespace Agm.Controllers
             {
                 code.Append(chars[b % (chars.Length)]);
             }
-            group.groupCode = code.ToString();
+            var test = db.Groups.FirstOrDefault(g => g.groupCode == code.ToString());
+            if (test == null)
+            {
+                group.groupCode = code.ToString();
+            }
+           else
+            {
+                TempData["msg"] = "<script>alert('İşlem sırasında beklenmedik bir hata oluştu.')</script>";
+                return RedirectToAction("Index","Home");
+            }
 
             if (file != null && file.ContentLength > 0)
             {
@@ -271,61 +280,34 @@ namespace Agm.Controllers
                 TempData["msg"] = "<script>alert('Önce yönetici olarak bir grup kurmalısınız.')</script>";
                 return View();
             }
-            var groupList = new List<groupsModel>();
-            var groupManager = db.spGroupsManager(user.userId).ToList();
-            if (groupManager.Count != 0)
+            return View();
+        }
+
+        public ActionResult Info()
+        {
+            var user = Session["User"] as Users;
+            if (user == null)
             {
-             
-                foreach (var group in groupManager)
+                return RedirectToAction("Login", "Home");
+            }
+            var result = db.spGroupsManager(user.userId).ToList();
+            if (result.Count != 0)
+            {
+                var groupList = new List<groupsModel>();
+                foreach (var group in result)
                 {
                     var gModel = new groupsModel();
                     gModel.groupId = group.groupId;
                     gModel.groupName = group.groupName;
                     gModel.groupImageUrl = group.groupImageUrl;
-                    gModel.groupCode = group.groupCode;
                     groupList.Add(gModel);
-                }   
-            }
-            var Agroup = groupList.FirstOrDefault(g=>g.groupCode==inputGroupCode);
-            if (Agroup == null)
-            {
-                TempData["msg"] = "<script>alert('Böyle bir grubunuz yok.Lütfen doğru bir grup kodunuzu giriniz.')</script>";
-                return View();
-            }
-            var userLog = db.Users.FirstOrDefault(u => u.userLoginName == userLoginName);
-            if (userLog == null)
-            {
-                TempData["msg"] = "<script>alert('Böyle bir kullanıcı yok.Lütfen doğru bir kulanıcı adı giriniz.')</script>";
-                return View();
-            }
-
-
-            var control = db.userGroupsUsidGrpid(userLog.userId, Agroup.groupId).ToList(); 
-            if (control.Count==0)
-            {
-                TempData["msg"] = "<script>alert('Yalnızca girdiğiniz grubun Listesindeki kişilerden asistan seçebilirsiniz.')</script>";
-                return View();
-            }
-            else if (control.Count != 0)
-            {
-                try
-                {
-
-                    //db.spAddAsistanceWithOrder(user.userId, userLog.userLoginName);
-                    db.spAddAsistance(user.userId, userLog.userLoginName);
-                    db.SaveChanges();
-                        TempData["msg"] = "<script>alert('Asistan grubunuza eklendi.')</script>";
-                        return RedirectToAction("AsistanceIndex","Groups");
                 }
-                catch 
-                {
-
-                    TempData["msg"] = "<script>alert('İşlem sırasında bir hata oluştu.Bu kişi grubunuzun asistanı olabilir ya da henüz grubunuza üye değil.')</script>";
-                    return View();
-                }
+                return View(groupList);
             }
-            
-            
+            else
+            {
+                ViewBag.NoResult = "Henüz yönetici olduğunuz herhangi bir grubunuz yok.";
+            }
             return View();
         }
 
