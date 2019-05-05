@@ -51,6 +51,7 @@
             $.ajax({
                 url: $('#Get').val(),
                 type: 'GET',
+                data: { id: location.href.split('/').pop() },
                 datatype: 'json',
                 success: function (data) {
                     $tbl.empty();
