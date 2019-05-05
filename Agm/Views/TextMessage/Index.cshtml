@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserIndex.cshtml";
+}
+
+<h2>Text Message Index</h2>
+
+@Html.Hidden("Get", Url.Action("Get", "TextMessage"))
+<table class="table">
+    <thead>
+        <tr>
+            <th>textd</th>
+            <th>textOwner</th>
+            <th>textContent</th>
+            <th>groupFk</th>   
+             
+        </tr>
+    </thead>
+    <tbody id="tblInfo"></tbody>
+</table>

@@ -56,3 +56,16 @@ C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\EntityFramework.dll
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\EntityFramework.SqlServer.dll
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\EntityFramework.xml
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\EntityFramework.SqlServer.xml
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.Owin.dll
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.Owin.Security.dll
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Owin.dll
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.AspNet.SignalR.Core.pdb
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.Owin.xml
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.Owin.Security.xml

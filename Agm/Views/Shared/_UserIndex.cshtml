@@ -35,5 +35,38 @@
     <script src="~/scripts/jquery-3.0.0.min.js"></script>
     <script src="~/scripts/bootstrap.min.js"></script>
     <script src="~/scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            var msg = $.connection.msgHub;
+            msg.client.displayTextMessage = function () {
+                getData();
+            };
+            $.connection.hub.start();
+            getData();
+        });
+        function getData() {
+            var $tbl = $('#tblInfo');
+            $.ajax({
+                url: $('#Get').val(),
+                type: 'GET',
+                datatype: 'json',
+                success: function (data) {
+                    $tbl.empty();
+                    $.each(data.listMsg, function (i, model) {
+                        $tbl.append(
+                            '<tr>' +
+                            '<td>' + model.textId + '</td>' +
+                            '<td>' + model.textOwner + '</td>' +
+                            '<td>' + model.textContent + '</td>' +
+                            '<td>' + model.groupFk + '</td>' +
+                            '<tr>'
+                            );
+                    });
+                }
+            });
+        }
+    </script>
 </body>
 </html>
