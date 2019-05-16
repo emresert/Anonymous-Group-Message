@@ -60,7 +60,8 @@ namespace Agm.Controllers
             {
                 code.Append(chars[b % (chars.Length)]);
             }
-            var test = db.Groups.FirstOrDefault(g => g.groupCode == code.ToString());
+            string cod = code.ToString();
+            var test = db.Groups.FirstOrDefault(g => g.groupCode == cod);
             if (test == null)
             {
                 group.groupCode = code.ToString();

@@ -172,6 +172,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\deneme.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\groupCreate.css" />
@@ -340,6 +341,7 @@
     <Content Include="Views\Groups\AsistanceIndex.cshtml" />
     <Content Include="Views\Groups\CreateAsistance.cshtml" />
     <Content Include="Views\TextMessage\Index.cshtml" />
+    <Content Include="Views\Home\deneme.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

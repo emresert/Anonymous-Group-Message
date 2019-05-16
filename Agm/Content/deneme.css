@@ -1,0 +1,11 @@
+﻿.heading-box h2{ width:100%; color: red; }
+.text-box {
+	position: absolute;
+	top: 50%;
+	left: 15%;
+	right: 15%;
+	color: #fff;
+	text-align: center;
+	transform: translateY(-50%);
+}
+
