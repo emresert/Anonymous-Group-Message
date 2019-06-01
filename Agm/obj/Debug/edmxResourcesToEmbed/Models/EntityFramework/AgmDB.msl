@@ -35,6 +35,7 @@
     <EntitySetMapping Name="TextMessage">
       <EntityTypeMapping TypeName="AgmModel.TextMessage">
         <MappingFragment StoreEntitySet="TextMessage">
+          <ScalarProperty Name="userFk" ColumnName="userFk" />
           <ScalarProperty Name="textId" ColumnName="textId" />
           <ScalarProperty Name="textOwner" ColumnName="textOwner" />
           <ScalarProperty Name="textContent" ColumnName="textContent" />

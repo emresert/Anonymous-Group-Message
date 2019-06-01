@@ -1,7 +1,6 @@
 ﻿body{
         	height: 100%;
-            background-size: cover !important;
-            
+            background-size: cover !important;    
             background: url('../Files/Img/bi6.jpg') center center !important;
             background-repeat: repeat !important;  
 }
@@ -9,21 +8,16 @@
             
             background-size: cover !important;
             background: url('../Files/Img/bi3.jpg') center center !important;
-            background-repeat: repeat !important;  
-            
-          
+            background-repeat: repeat !important;           
 }
 .search-table{
     margin-top:0px;
     margin-left:2px;
     width:99%;
     margin-right:2px;
-  
-  
 }
 .search-box{
     background: #c1c1c1;
-    
     padding-left:0%;
     padding-right:0%;
     padding-top:2%;
@@ -38,11 +32,15 @@
 .search-list{
     background: #fff;
     border: 1px solid #ababab;
-    border-top: none;
-  
+    border-top: none;  
+    width:100%;
+}
+.search-list td{
+   
 }
 .search-list h3{
     background: #eee;
     padding: 3%;
     margin-bottom: 0%;
 }
+

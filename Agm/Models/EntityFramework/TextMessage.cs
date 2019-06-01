@@ -25,8 +25,10 @@ namespace Agm.Models.EntityFramework
         public string textContent { get; set; }
         public Nullable<int> groupFk { get; set; }
         public Nullable<System.DateTime> textDate { get; set; }
+        public Nullable<int> userFk { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Groups> Groups { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Agm.Models.Class.groupsModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "SendMessage";
     Layout = "~/Views/Shared/_UserIndex.cshtml";
 }
 <div class="container">
@@ -19,7 +19,7 @@
                     <script>
                         $(document).ready(function () {
                             $("#myInput").on("keyup", function () {
-                                var value = $(this).val().toLowerCase();                      
+                                var value = $(this).val().toLowerCase();
                                 $("#myTable tr").filter(function () {
                                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                                 });
@@ -30,24 +30,27 @@
             </div>
         </div>
 
-        <div class="search-list " >
-            <table class="table table-responsive-sm" id="myTable" style="">
+        <div class="search-list">
+            <table class="table" id="myTable">
                 <tbody>
                     @if (Model != null)
                     {
                         foreach (var item in Model)
                         {
+
                             <tr>
                                 <td>
                                     <img alt="asd" src="@item.groupImageUrl" style="width:50px;height:50px;border:0px solid black;border-radius:50%;" />
                                 </td>
                                 <td>
-                                    <a  style="text-decoration:none;"href="@Url.Action("Index","TextMessage", new {id=item.groupId})">
-                                    <h6 class="h6">@item.groupName</h6></a>
+                                    <a style="text-decoration: none;" href="@Url.Action("Index","TextMessage", new {id=item.groupId})">
+                                        <h6 class="h6">@item.groupName</h6>
+                                    </a>
                                 </td>
                                 <td>
-                                    <a class="leaveGroup" data-id=@item.groupId>
-                                        <center><i class="fas fa-trash-alt" style="color:red;cursor:pointer; margin-top:7px;"></i></center>
+                                    <a href="@Url.Action("Create","TextMessage", new {id=item.groupId})">
+                                        
+                                        <center>  <i class="fas fa-paper-plane" style="color:forestgreen;cursor:pointer; margin-top:7px;"></i></center>
                                     </a>
                                 </td>
                             </tr>
@@ -66,10 +69,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-

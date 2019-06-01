@@ -35,5 +35,6 @@ namespace Agm.Models.Class
         public virtual ICollection<Groups> Groups { get; set; }
         public virtual ICollection<usersgroupModel> usersgroupModel { get; set; }
         public virtual ICollection<Manager> Manager { get; set; }
+        public virtual ICollection<TextMessage> TextMessage { get; set; }
     }
 }

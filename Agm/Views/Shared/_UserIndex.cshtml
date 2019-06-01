@@ -22,9 +22,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Css made by me-->
     <link href="~/Content/navbarIndex.css" rel="stylesheet" />
-    <link href="~/Content/homeIndex.css" rel="stylesheet" />
     <link href="~/Content/groupIndex.css" rel="stylesheet" />
     <link href="~/Content/groupCreate.css" rel="stylesheet" />
+    <link href="~/Content/homeIndex.css" rel="stylesheet" />
  
     <!--Script made by me-->
     <script src="~/scripts/homeIndexScript.js"></script>
@@ -58,11 +58,10 @@
                     $tbl.empty();
                     $.each(data.listMsg, function (i, model) {
                         $tbl.append(
-                            '<tr>' +
-                            '<td>' + model.textId + '</td>' +
+                            '<tr>' +            
                             '<td>' + model.textOwner + '</td>' +
                             '<td>' + model.textContent + '</td>' +
-                            '<td>' + model.groupFk + '</td>' +
+                             '<td>' + model.textDate + '</td>' +
                             '<tr>'
                             );
                     });

@@ -48,6 +48,8 @@
     <Property Name="groupFk" Type="Int32" />
     <Property Name="textDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_TextMessage" FromRole="TextMessage" ToRole="Groups" />
+    <Property Name="userFk" Type="Int32" />
+    <NavigationProperty Name="Users" Relationship="AgmModel.FK_TextMessage_Users" FromRole="TextMessage" ToRole="Users" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -63,6 +65,7 @@
     <NavigationProperty Name="Asistance" Relationship="Self.FK_Asistance_Users" FromRole="Users" ToRole="Asistance" />
     <NavigationProperty Name="Manager" Relationship="Self.FK_Manager_Users" FromRole="Users" ToRole="Manager" />
     <NavigationProperty Name="Groups" Relationship="Self.UsersGroup" FromRole="Users" ToRole="Groups" />
+    <NavigationProperty Name="TextMessage" Relationship="AgmModel.FK_TextMessage_Users" FromRole="Users" ToRole="TextMessage" />
   </EntityType>
   <Association Name="FK_Asistance_Manager">
     <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
@@ -199,6 +202,10 @@
       <Parameter Name="id" Mode="In" Type="Int32" />
       <Parameter Name="groupid" Mode="In" Type="Int32" />
     </FunctionImport>
+    <AssociationSet Name="FK_TextMessage_Users" Association="AgmModel.FK_TextMessage_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TextMessage" EntitySet="TextMessage" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="spAsistanceOfManager_Result">
     <Property Type="String" Name="asistanceNameSurname" Nullable="true" MaxLength="100" />
@@ -230,4 +237,16 @@
     <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
     <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
   </ComplexType>
+  <Association Name="FK_TextMessage_Users">
+    <End Type="AgmModel.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="AgmModel.TextMessage" Role="TextMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="TextMessage">
+        <PropertyRef Name="userFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

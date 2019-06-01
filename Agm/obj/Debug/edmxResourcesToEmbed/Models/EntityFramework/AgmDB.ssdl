@@ -45,6 +45,7 @@
     <Property Name="textContent" Type="nvarchar(max)" />
     <Property Name="groupFk" Type="int" />
     <Property Name="textDate" Type="smalldatetime" />
+    <Property Name="userFk" Type="int" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -150,6 +151,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TextMessage_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="TextMessage" Type="Self.TextMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="TextMessage">
+        <PropertyRef Name="userFk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UsersGroup_Groups">
     <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
     <End Role="UsersGroup" Type="Self.UsersGroup" Multiplicity="*" />
@@ -242,6 +255,10 @@
     <AssociationSet Name="FK_Manager_Users" Association="Self.FK_Manager_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Manager" EntitySet="Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TextMessage_Users" Association="Self.FK_TextMessage_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TextMessage" EntitySet="TextMessage" />
     </AssociationSet>
     <AssociationSet Name="FK_UsersGroup_Groups" Association="Self.FK_UsersGroup_Groups">
       <End Role="Groups" EntitySet="Groups" />

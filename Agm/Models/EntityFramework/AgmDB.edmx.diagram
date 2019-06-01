@@ -17,6 +17,7 @@
         <AssociationConnector Association="AgmModel.FK_Manager_Users" ManuallyRouted="false" />
         <AssociationConnector Association="AgmModel.GroupAsistance" ManuallyRouted="false" />
         <AssociationConnector Association="AgmModel.UsersGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="AgmModel.FK_TextMessage_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

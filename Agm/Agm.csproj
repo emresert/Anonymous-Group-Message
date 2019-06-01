@@ -172,7 +172,6 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\deneme.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\groupCreate.css" />
@@ -263,6 +262,7 @@
     <Compile Include="Hubs\MsgHub.cs" />
     <Compile Include="Models\Class\asistanceModel.cs" />
     <Compile Include="Models\Class\groupsModel.cs" />
+    <Compile Include="Models\Class\textMessageModel.cs" />
     <Compile Include="Models\Class\usersgroupModel.cs" />
     <Compile Include="Models\Class\usersModel.cs" />
     <Compile Include="Models\EntityFramework\AgmDB.Context.cs">
@@ -342,6 +342,8 @@
     <Content Include="Views\Groups\CreateAsistance.cshtml" />
     <Content Include="Views\TextMessage\Index.cshtml" />
     <Content Include="Views\Home\deneme.cshtml" />
+    <Content Include="Views\TextMessage\SendMessage.cshtml" />
+    <Content Include="Views\TextMessage\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

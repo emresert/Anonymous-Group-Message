@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AgmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AgmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asistance">
           <Key>
             <PropertyRef Name="asistanceId" />
@@ -50,6 +50,7 @@
           <Property Name="textContent" Type="nvarchar(max)" />
           <Property Name="groupFk" Type="int" />
           <Property Name="textDate" Type="smalldatetime" />
+          <Property Name="userFk" Type="int" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -155,6 +156,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TextMessage_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="TextMessage" Type="Self.TextMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="TextMessage">
+              <PropertyRef Name="userFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UsersGroup_Groups">
           <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
           <End Role="UsersGroup" Type="Self.UsersGroup" Multiplicity="*" />
@@ -248,6 +261,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Manager" EntitySet="Manager" />
           </AssociationSet>
+          <AssociationSet Name="FK_TextMessage_Users" Association="Self.FK_TextMessage_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TextMessage" EntitySet="TextMessage" />
+          </AssociationSet>
           <AssociationSet Name="FK_UsersGroup_Groups" Association="Self.FK_UsersGroup_Groups">
             <End Role="Groups" EntitySet="Groups" />
             <End Role="UsersGroup" EntitySet="UsersGroup" />
@@ -257,8 +274,7 @@
             <End Role="UsersGroup" EntitySet="UsersGroup" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AgmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -310,6 +326,8 @@
           <Property Name="groupFk" Type="Int32" />
           <Property Name="textDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_TextMessage" FromRole="TextMessage" ToRole="Groups" />
+          <Property Name="userFk" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="AgmModel.FK_TextMessage_Users" FromRole="TextMessage" ToRole="Users" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -325,6 +343,7 @@
           <NavigationProperty Name="Asistance" Relationship="Self.FK_Asistance_Users" FromRole="Users" ToRole="Asistance" />
           <NavigationProperty Name="Manager" Relationship="Self.FK_Manager_Users" FromRole="Users" ToRole="Manager" />
           <NavigationProperty Name="Groups" Relationship="Self.UsersGroup" FromRole="Users" ToRole="Groups" />
+          <NavigationProperty Name="TextMessage" Relationship="AgmModel.FK_TextMessage_Users" FromRole="Users" ToRole="TextMessage" />
         </EntityType>
         <Association Name="FK_Asistance_Manager">
           <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
@@ -441,26 +460,30 @@
             <Parameter Name="groupFk" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spAsistanceOfManager" ReturnType="Collection(AgmModel.spAsistanceOfManager_Result)">
-            <Parameter Name="managerId" Mode="In" Type="Int32" />
+          <Parameter Name="managerId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGroupJoin">
             <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="groupId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGroupsManager" ReturnType="Collection(AgmModel.spGroupsManager_Result)">
-            <Parameter Name="userId" Mode="In" Type="Int32" />
+          <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spLeaveGroup">
             <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="groupId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spUserGroup" ReturnType="Collection(AgmModel.spUserGroup_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="userGroupsUsidGrpid" ReturnType="Collection(AgmModel.userGroupsUsidGrpid_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="groupid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_TextMessage_Users" Association="AgmModel.FK_TextMessage_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="TextMessage" EntitySet="TextMessage" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="spAsistanceOfManager_Result">
           <Property Type="String" Name="asistanceNameSurname" Nullable="true" MaxLength="100" />
@@ -492,6 +515,18 @@
           <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <Association Name="FK_TextMessage_Users">
+          <End Type="AgmModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="AgmModel.TextMessage" Role="TextMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="TextMessage">
+              <PropertyRef Name="userFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -532,6 +567,7 @@
           <EntitySetMapping Name="TextMessage">
             <EntityTypeMapping TypeName="AgmModel.TextMessage">
               <MappingFragment StoreEntitySet="TextMessage">
+                <ScalarProperty Name="userFk" ColumnName="userFk" />
                 <ScalarProperty Name="textId" ColumnName="textId" />
                 <ScalarProperty Name="textOwner" ColumnName="textOwner" />
                 <ScalarProperty Name="textContent" ColumnName="textContent" />
