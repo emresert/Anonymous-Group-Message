@@ -7,14 +7,17 @@
 <h2>Text Message Index</h2>
 
 @Html.Hidden("Get", Url.Action("Get", "TextMessage"))
-<table class="table">
+<table class="table table-striped table-hover"  id="myMsgTable">
+  
     <thead>
         <tr>
-           
-            <th>Gönderen</th>
-            <th>Mesaj</th>
-            <th>Tarih</th>  
+            <th scope="col">Tarih</th>        
+            <th scope="col">Gönderen</th>
+            <th scope="col">Mesaj</th>
+            <th scope="col" width="1px;"></th>
         </tr>
     </thead>
-    <tbody id="tblInfo"></tbody>
+    <tbody id="tblInfo" >
+       
+    </tbody>
 </table>

@@ -179,6 +179,7 @@
     <Content Include="Content\homeIndex.css" />
     <Content Include="Content\navbarIndex.css" />
     <Content Include="Content\site.css" />
+    <Content Include="Content\textMessageIndex.css" />
     <Content Include="Content\userCreate.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
@@ -341,7 +342,6 @@
     <Content Include="Views\Groups\AsistanceIndex.cshtml" />
     <Content Include="Views\Groups\CreateAsistance.cshtml" />
     <Content Include="Views\TextMessage\Index.cshtml" />
-    <Content Include="Views\Home\deneme.cshtml" />
     <Content Include="Views\TextMessage\SendMessage.cshtml" />
     <Content Include="Views\TextMessage\Create.cshtml" />
     <None Include="Web.Debug.config">

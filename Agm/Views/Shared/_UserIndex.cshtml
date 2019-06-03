@@ -25,11 +25,12 @@
     <link href="~/Content/groupIndex.css" rel="stylesheet" />
     <link href="~/Content/groupCreate.css" rel="stylesheet" />
     <link href="~/Content/homeIndex.css" rel="stylesheet" />
- 
+    <link href="~/Content/textMessageIndex.css" rel="stylesheet" />
     <!--Script made by me-->
     <script src="~/scripts/homeIndexScript.js"></script>
 </head>
 <body>
+    
     @Html.Partial("_Navbar")
     @RenderBody()
     <script src="~/scripts/site.js"></script>
@@ -58,10 +59,11 @@
                     $tbl.empty();
                     $.each(data.listMsg, function (i, model) {
                         $tbl.append(
-                            '<tr>' +            
-                            '<td>' + model.textOwner + '</td>' +
-                            '<td>' + model.textContent + '</td>' +
-                             '<td>' + model.textDate + '</td>' +
+                            '<tr >' +
+                            '<td class="msgColumn">' + model.textDate + '</td>' +
+                             '<td class="msgColumn">' + model.textOwner + '</td>' +
+                             '<td class="msgColumn">' + model.textContent.substring(0, 75) + '...' + '</td>' +
+                            '<td class="rmvMsg">' + '<a href="../Remove/' + model.textId + '">' + '<i style="color:red;" class="fas fa-trash-alt fa-1x">' + '</i></a></td>' +
                             '<tr>'
                             );
                     });
@@ -69,5 +71,6 @@
             });
         }
     </script>
+    
 </body>
 </html>

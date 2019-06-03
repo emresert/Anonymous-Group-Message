@@ -1,0 +1,18 @@
+﻿#myMsgTable{
+    table-layout: fixed; width:100%;
+}
+
+th,.msgColumn {
+    
+    overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width:100%;
+}
+.rmvMsg{
+      background-color:white !important;
+    overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+    float:right;
+}

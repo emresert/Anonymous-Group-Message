@@ -36,7 +36,7 @@ namespace Agm.Controllers
                 using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["MsgConnection"].ConnectionString))
                 {
                     connection.Open();
-                    using (SqlCommand command = new SqlCommand(@"SELECT [textId],[textOwner],[textContent],[groupFk], convert(varchar(25), [textDate], 120) as textDate from [dbo].[TextMessage] where groupFk=" + id +"order by textId desc", connection))
+                    using (SqlCommand command = new SqlCommand(@"SELECT [textId],[textOwner],[textContent],[groupFk], substring(convert(varchar(25), [textDate], 120),1,16) as textDate from [dbo].[TextMessage] where groupFk=" + id +"order by textId desc", connection))
                     {
 
                         command.Notification = null;
@@ -52,11 +52,10 @@ namespace Agm.Controllers
                         var listMsg = reader.Cast<IDataRecord>()
                                 .Select(x => new
                                 {
-                                 
                                     textOwner = (string)x["textOwner"],
                                     textContent = (string)x["textContent"],
+                                    textId =(int)x["textId"],
                                     textDate = x["textDate"].ToString()
-
                                 }).ToList();
 
                         return Json(new { listMsg = listMsg }, JsonRequestBehavior.AllowGet);
@@ -121,6 +120,34 @@ namespace Agm.Controllers
             db.TextMessage.Add(message);
             db.SaveChanges();
             return View("Index",id);
+        }
+
+       
+        public ActionResult Remove(int id)
+        {
+            var user = Session["User"] as Users;
+            try
+            {
+                var msg = db.TextMessage.FirstOrDefault(m => m.textId == id);               
+                var manager = db.Manager.FirstOrDefault(x => x.userFk == msg.userFk);
+                var group = db.Groups.FirstOrDefault(g => g.managerFk == manager.managerId);
+                if(group != null)
+                {
+                    db.TextMessage.Remove(msg);
+                    db.SaveChanges();
+                    return View("Index",group.groupId);
+                }
+              else
+                {
+                    return View();
+                }
+               
+            }
+            catch
+            {
+
+                return View("Index",id) ;
+            }
         }
     }
 }
