@@ -49,7 +49,7 @@
             getData();
         });
         function getData() {
-            var $tbl = $('#tblInfo');
+            var $tbl = $('#msgInfo');
             $.ajax({
                 url: $('#Get').val(),
                 type: 'GET',
@@ -58,14 +58,32 @@
                 success: function (data) {
                     $tbl.empty();
                     $.each(data.listMsg, function (i, model) {
-                        $tbl.append(
-                            '<tr >' +
-                            '<td class="msgColumn">' + model.textDate + '</td>' +
-                             '<td class="msgColumn">' + model.textOwner + '</td>' +
-                             '<td class="msgColumn">' + model.textContent.substring(0, 75) + '...' + '</td>' +
-                            '<td class="rmvMsg">' + '<a href="../Remove/' + model.textId + '">' + '<i style="color:red;" class="fas fa-trash-alt fa-1x">' + '</i></a></td>' +
-                            '<tr>'
-                            );
+                        var $mod = i % 2;
+                        if ($mod == 0) {
+                            $tbl.append(
+                        /*   '<tr >' +
+                           '<td class="msgColumn">' + model.textDate + '</td>' +
+                            '<td class="msgColumn">' + model.textOwner + '</td>' +
+                            '<td class="msgColumn">' + model.textContent.substring(0, 75) + '...' + '</td>' +
+                           '<td class="rmvMsg">' + '<a href="../Remove/' + model.textId + '">' + '<i style="color:red;" class="fas fa-trash-alt fa-1x">' + '</i></a></td>' +
+                           '<tr>' */
+                             '<div class="rcorners ">' + model.textContent + '</div>'
+
+                           );
+                        }
+                        else if ($mod == 1){
+                            $tbl.append(
+                            '<div class="lcorners ">'+ model.textContent +'</div>'
+                             );
+                        }
+                        else if (model == null) {
+                            $tbl.append(
+                              '<div class="lcorners ">' + 'boş mesaj yok' + '</div>'
+                               );
+                        }
+                            
+                        
+                       
                     });
                 }
             });
