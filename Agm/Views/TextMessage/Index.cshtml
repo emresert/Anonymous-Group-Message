@@ -5,8 +5,8 @@
 }
 
 @Html.Hidden("Get", Url.Action("Get", "TextMessage"))
-
-<div class="header" style=""> Bu gruba ait mesajlar &nbsp;<i class="far fa-comment-dots"></i></div>
+@Html.Raw(TempData["msg"])
+<div class="header" style=""><center>Bu gruba ait mesajlar &nbsp;<i class="far fa-comment-dots"></i></center> </div>
 <div id="msgInfo" class="flexboxCapsule">
     
       

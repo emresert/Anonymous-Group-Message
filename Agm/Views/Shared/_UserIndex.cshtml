@@ -65,15 +65,27 @@
                            '<td class="msgColumn">' + model.textDate + '</td>' +
                             '<td class="msgColumn">' + model.textOwner + '</td>' +
                             '<td class="msgColumn">' + model.textContent.substring(0, 75) + '...' + '</td>' +
-                           '<td class="rmvMsg">' + '<a href="../Remove/' + model.textId + '">' + '<i style="color:red;" class="fas fa-trash-alt fa-1x">' + '</i></a></td>' +
+                           '<td class="rmvMsg">' + </td>' +
                            '<tr>' */
-                             '<div class="rcorners ">' + model.textContent + '</div>'
-
+                            
+                             
+                             '<div class="rcorners ">' + model.textContent + '<br>' +
+                             '<p style="color:black; text-align:right;">' + model.textOwner + ' | ' + model.textDate +
+                             ' | '+'<a href="../Remove/' + model.textId + '">' + '<i style="color:white;" class="fas fa-trash-alt fa-1x">' + '</i></a>'+
+                             '</p>' +
+                              
+                             '</div>'
+                             
                            );
                         }
                         else if ($mod == 1){
                             $tbl.append(
-                            '<div class="lcorners ">'+ model.textContent +'</div>'
+
+                             '<div class="lcorners ">' + model.textContent + '<br>' +
+                             '<p style="color:black; text-align:right;">' + model.textOwner + ' | ' + model.textDate +
+                             ' | ' + '<a href="../Remove/' + model.textId + '">' + '<i style="color:white;" class="fas fa-trash-alt fa-1x">' + '</i></a>' +
+                             '</p>' +
+                             '</div>'
                              );
                         }
                         else if (model == null) {

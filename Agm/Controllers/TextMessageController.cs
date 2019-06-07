@@ -125,29 +125,38 @@ namespace Agm.Controllers
        
         public ActionResult Remove(int id)
         {
+            
             var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             try
             {
                 var msg = db.TextMessage.FirstOrDefault(m => m.textId == id);               
-                var manager = db.Manager.FirstOrDefault(x => x.userFk == msg.userFk);
-                var group = db.Groups.FirstOrDefault(g => g.managerFk == manager.managerId);
+                var manager = db.Manager.FirstOrDefault(x => x.userFk == user.userId);
+                var group = db.Groups.FirstOrDefault(g => g.managerFk == manager.managerId && g.groupId == msg.groupFk);
                 if(group != null)
                 {
                     db.TextMessage.Remove(msg);
                     db.SaveChanges();
-                    return View("Index",group.groupId);
+                    TempData["msg"] = "<script>alert('Mesaj tüm kullanıcılardan silindi.')</script>";
+                    return RedirectToAction("Index", "TextMessage", new { @id = group.groupId });
                 }
               else
                 {
-                    return View();
+                    TempData["msg"] = "<script>alert('Bu mesajı silmek için yetkili değilsiniz.')</script>";
+                    return RedirectToAction("Index", "TextMessage", new { @id = group.groupId });
                 }
                
             }
             catch
             {
-
-                return View("Index",id) ;
+                TempData["msg"] = "<script>alert('Bu mesajı silmek için yetkili değilsiniz.')</script>";
+                var ms = db.TextMessage.FirstOrDefault(m => m.textId == id);
+                var group = db.Groups.FirstOrDefault(g => g.groupId == ms.groupFk);
+                return RedirectToAction("Index", "TextMessage", new { @id = group.groupId});
             }
-        }
+            }
     }
 }
