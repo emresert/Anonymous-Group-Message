@@ -70,12 +70,13 @@ namespace Agm.Controllers
         }
         public ActionResult SendMessage()
         {
+
             var user = Session["User"] as Users;
             if (user == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-            var result = db.spUserGroup(user.userId).ToList();
+            var result = db.spGroupsManager(user.userId).ToList();
             if (result.Count != 0)
             {
                 var groupList = new List<groupsModel>();
@@ -91,7 +92,7 @@ namespace Agm.Controllers
             }
             else
             {
-                ViewBag.NoResult = "Henüz mesaj yazmak için herhangi bir grubunuz yok.";
+                ViewBag.NoResult = "Henüz yönetici olduğunuz herhangi bir grubunuz yok.";
             }
 
             return View();

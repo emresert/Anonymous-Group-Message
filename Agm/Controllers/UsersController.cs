@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.IO;
 using Agm.Models.EntityFramework;
+using System.Web.Security;
 
 namespace Agm.Controllers
 {
@@ -69,6 +70,13 @@ namespace Agm.Controllers
             db.Users.Add(user);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Logout()
+        {
+            
+            Session["User"] = null;
+            
+            return RedirectToAction("Login", "Home");
         }
     }
 }

@@ -12,22 +12,21 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Users</h4>
-        <hr />
+       
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
       
-        <div class="form-group">
-            @Html.LabelFor(model => model.userLoginName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <div class="form-group container mt-5">
+          <h4 class="headerAdd" style="">Lütfen eklemek istediğiniz kişinin kullanıcı adını giriniz.</h4>  
+            <div class="col-md-10 inputAddUser">
                 @Html.EditorFor(model => model.userLoginName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.userLoginName, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Ekle" class="btn btn-default" />
+        <div class="form-group container">
+            <div class="col-md-offset-2 col-md-10" style="margin:auto;">
+              <center><input type="submit" style="width:50%;" value="Ekle" class="btn btn-primary" /></center>  
             </div>
         </div>
     </div>

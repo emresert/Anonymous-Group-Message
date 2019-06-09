@@ -1,3 +1,5 @@
+/* Delete Text Message*/
+delete from TextMessage
 /*grup asistan deðerlerini sil*/
 DELETE GroupAsistance FROM GroupAsistance ga inner join Asistance a on ga.asistanceFk = a.asistanceId
 /*asistanlarý sil*/
