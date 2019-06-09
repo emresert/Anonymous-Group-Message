@@ -206,6 +206,11 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="TextMessage" EntitySet="TextMessage" />
     </AssociationSet>
+    <FunctionImport Name="spAddUserGroupsWithLogName">
+      <Parameter Name="userLogName" Mode="In" Type="String" />
+      <Parameter Name="groupFk" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="sysdiagrams" EntityType="AgmModel.sysdiagrams" />
   </EntityContainer>
   <ComplexType Name="spAsistanceOfManager_Result">
     <Property Type="String" Name="asistanceNameSurname" Nullable="true" MaxLength="100" />
@@ -249,4 +254,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

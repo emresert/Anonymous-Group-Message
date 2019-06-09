@@ -312,5 +312,63 @@ namespace Agm.Controllers
             return View();
         }
 
+        public ActionResult AddUserToGroup()
+        {
+            var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var result = db.spGroupsManager(user.userId).ToList();
+            if (result.Count != 0)
+            {
+                var groupList = new List<groupsModel>();
+                foreach (var group in result)
+                {
+                    var gModel = new groupsModel();
+                    gModel.groupId = group.groupId;
+                    gModel.groupName = group.groupName;
+                    gModel.groupImageUrl = group.groupImageUrl;
+                    groupList.Add(gModel);
+                }
+                return View(groupList);
+            }
+            else
+            {
+                ViewBag.NoResult = "Henüz yönetici olduğunuz herhangi bir grubunuz yok.";
+            }
+
+            return View();
+        }
+        public ActionResult addUser(int id)
+        {
+            
+            return View();
+        }
+         [HttpPost]
+         public ActionResult addUser(int id, usersModel uModel)
+        {
+            try
+            {
+                var group = db.Groups.FirstOrDefault(g => g.groupId == id);
+                var user = db.Users.FirstOrDefault(u => u.userLoginName == uModel.userLoginName);
+                if (user == null)
+                {
+                    TempData["msg"] = "<script>alert('Böyle bir kulanıcı adı bulunamadı.')</script>";
+                    return View();
+                }
+
+                db.spAddUserGroupsWithLogName(user.userLoginName, group.groupId);
+
+                TempData["msg"] = "<script>alert('Üye gruba eklendi.')</script>";
+                return RedirectToAction("AddUserToGroup", "Groups");
+            }
+            catch 
+            {
+               TempData["msg"] = "<script>alert('Bu kullanıcı zaten bu gruba üye.')</script>";
+                return View();
+            }
+       
+        }
     }
 }

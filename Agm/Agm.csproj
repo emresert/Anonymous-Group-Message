@@ -299,6 +299,9 @@
     <Compile Include="Models\EntityFramework\spUserGroup_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityFramework\sysdiagrams.cs">
+      <DependentUpon>AgmDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityFramework\TextMessage.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
@@ -344,6 +347,8 @@
     <Content Include="Views\TextMessage\Index.cshtml" />
     <Content Include="Views\TextMessage\SendMessage.cshtml" />
     <Content Include="Views\TextMessage\Create.cshtml" />
+    <Content Include="Views\Groups\AddUserToGroup.cshtml" />
+    <Content Include="Views\Groups\addUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

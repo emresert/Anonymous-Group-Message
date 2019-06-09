@@ -36,6 +36,16 @@
     <Property Name="managerNameSurname" Type="nvarchar" MaxLength="100" />
     <Property Name="userFk" Type="int" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="TextMessage">
     <Key>
       <PropertyRef Name="textId" />
@@ -199,6 +209,10 @@
     <Parameter Name="userFk" Type="int" Mode="In" />
     <Parameter Name="groupFk" Type="int" Mode="In" />
   </Function>
+  <Function Name="spAddUserGroupsWithLogName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userLogName" Type="nvarchar" Mode="In" />
+    <Parameter Name="groupFk" Type="int" Mode="In" />
+  </Function>
   <Function Name="spAsistanceOfManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="managerId" Type="int" Mode="In" />
   </Function>
@@ -225,6 +239,7 @@
     <EntitySet Name="GroupAsistance" EntityType="Self.GroupAsistance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TextMessage" EntityType="Self.TextMessage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersGroup" EntityType="Self.UsersGroup" Schema="dbo" store:Type="Tables" />

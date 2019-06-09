@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Agm.Models.Class.groupsModel>
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_UserIndex.cshtml";
+}
+@Html.Raw(TempData["msg"])
+<div class="container">
+    <div class="search-table">
+        <div class="search-box capsule" style="background:none !important;">
+            <div class="row">
+                <div class="input-group md-form form-sm form-2 pl-0">
+                    <input class="form-control my-0 py-1 amber-border" type="text" id="myInput" onkeyup="myFunction()" placeholder="Gruplarımda Ara" aria-label="Search">
+                    <div class="input-group-append">
+                        <span class="input-group-text amber lighten-3" id="basic-text1">
+                            <i class="fas fa-search text-grey"
+                               aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            $("#myInput").on("keyup", function () {
+                                var value = $(this).val().toLowerCase();
+                                $("#myTable tr").filter(function () {
+                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                });
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-list">
+            <table class="table" id="myTable">
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    <img alt="asd" src="@item.groupImageUrl" style="width:50px;height:50px;border:0px solid black;border-radius:50%;" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.groupName)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("addUser","Groups",new {id=item.groupId})">
+                                        <i class="fas fa-user-plus" style="cursor:pointer;"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <center>@ViewBag.NoResult</center>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

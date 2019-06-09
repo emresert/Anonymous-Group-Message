@@ -32,6 +32,7 @@ namespace Agm.Models.EntityFramework
         public virtual DbSet<Manager> Manager { get; set; }
         public virtual DbSet<TextMessage> TextMessage { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     
         public virtual int spAddAsistance(Nullable<int> userId, string asistanceUserLoginName)
         {
@@ -136,6 +137,19 @@ namespace Agm.Models.EntityFramework
                 new ObjectParameter("groupid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<userGroupsUsidGrpid_Result>("userGroupsUsidGrpid", idParameter, groupidParameter);
+        }
+    
+        public virtual int spAddUserGroupsWithLogName(string userLogName, Nullable<int> groupFk)
+        {
+            var userLogNameParameter = userLogName != null ?
+                new ObjectParameter("userLogName", userLogName) :
+                new ObjectParameter("userLogName", typeof(string));
+    
+            var groupFkParameter = groupFk.HasValue ?
+                new ObjectParameter("groupFk", groupFk) :
+                new ObjectParameter("groupFk", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddUserGroupsWithLogName", userLogNameParameter, groupFkParameter);
         }
     }
 }
