@@ -300,9 +300,6 @@
     <Compile Include="Models\EntityFramework\spUserGroup_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFramework\sysdiagrams.cs">
-      <DependentUpon>AgmDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EntityFramework\TextMessage.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>

@@ -14,12 +14,6 @@ namespace Agm.Models.EntityFramework
     
     public partial class TextMessage
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TextMessage()
-        {
-            this.Groups = new HashSet<Groups>();
-        }
-    
         public int textId { get; set; }
         public string textOwner { get; set; }
         public string textContent { get; set; }
@@ -27,8 +21,6 @@ namespace Agm.Models.EntityFramework
         public Nullable<System.DateTime> textDate { get; set; }
         public Nullable<int> userFk { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Groups> Groups { get; set; }
         public virtual Users Users { get; set; }
     }
 }

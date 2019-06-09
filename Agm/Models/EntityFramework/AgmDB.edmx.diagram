@@ -4,21 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="26755716eaa840929c048e029ba394c4" Name="Diagram1">
-        <EntityTypeShape EntityType="AgmModel.Asistance" Width="1.5" PointX="9.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AgmModel.Groups" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AgmModel.Manager" Width="1.5" PointX="7.5" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AgmModel.TextMessage" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AgmModel.Users" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+      <Diagram DiagramId="8d1a73bf08ed4df99b341992102b4693" Name="Diagram1">
+        <EntityTypeShape EntityType="AgmModel.Asistance" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgmModel.Groups" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgmModel.Manager" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgmModel.TextMessage" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AgmModel.Users" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="AgmModel.FK_Asistance_Manager" ManuallyRouted="false" />
         <AssociationConnector Association="AgmModel.FK_Asistance_Users" ManuallyRouted="false" />
         <AssociationConnector Association="AgmModel.FK_Groups_Manager" ManuallyRouted="false" />
-        <AssociationConnector Association="AgmModel.FK_Groups_TextMessage" ManuallyRouted="false" />
         <AssociationConnector Association="AgmModel.FK_Manager_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AgmModel.FK_TextMessage_Users" ManuallyRouted="false" />
         <AssociationConnector Association="AgmModel.GroupAsistance" ManuallyRouted="false" />
         <AssociationConnector Association="AgmModel.UsersGroup" ManuallyRouted="false" />
-        <AssociationConnector Association="AgmModel.FK_TextMessage_Users" />
-        <EntityTypeShape EntityType="AgmModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

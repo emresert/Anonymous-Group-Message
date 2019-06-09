@@ -23,7 +23,6 @@
     </Key>
     <Property Name="groupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="groupName" Type="nvarchar" MaxLength="150" />
-    <Property Name="textFk" Type="int" />
     <Property Name="groupImageUrl" Type="nvarchar" MaxLength="250" />
     <Property Name="managerFk" Type="int" />
     <Property Name="groupCode" Type="nchar" MaxLength="8" />
@@ -35,16 +34,6 @@
     <Property Name="managerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="managerNameSurname" Type="nvarchar" MaxLength="100" />
     <Property Name="userFk" Type="int" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TextMessage">
     <Key>
@@ -137,18 +126,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Groups_TextMessage">
-    <End Role="TextMessage" Type="Self.TextMessage" Multiplicity="0..1" />
-    <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TextMessage">
-        <PropertyRef Name="textId" />
-      </Principal>
-      <Dependent Role="Groups">
-        <PropertyRef Name="textFk" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Manager_Users">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
@@ -197,14 +174,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="spAddAsistance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="userId" Type="int" Mode="In" />
-    <Parameter Name="asistanceUserLoginName" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="spAddAsistanceWithOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="userId" Type="int" Mode="In" />
-    <Parameter Name="asistanceUserLoginName" Type="nvarchar" Mode="In" />
-  </Function>
   <Function Name="spAddUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userFk" Type="int" Mode="In" />
     <Parameter Name="groupFk" Type="int" Mode="In" />
@@ -239,7 +208,6 @@
     <EntitySet Name="GroupAsistance" EntityType="Self.GroupAsistance" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TextMessage" EntityType="Self.TextMessage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersGroup" EntityType="Self.UsersGroup" Schema="dbo" store:Type="Tables" />
@@ -261,10 +229,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_Groups_Manager" Association="Self.FK_Groups_Manager">
       <End Role="Manager" EntitySet="Manager" />
-      <End Role="Groups" EntitySet="Groups" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Groups_TextMessage" Association="Self.FK_Groups_TextMessage">
-      <End Role="TextMessage" EntitySet="TextMessage" />
       <End Role="Groups" EntitySet="Groups" />
     </AssociationSet>
     <AssociationSet Name="FK_Manager_Users" Association="Self.FK_Manager_Users">
