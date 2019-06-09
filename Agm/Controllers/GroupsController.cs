@@ -203,9 +203,14 @@ namespace Agm.Controllers
             try
             {
                 db.spLeaveGroup(user.userId,id);
-                var group = db.Groups.FirstOrDefault(g => g.groupId == id);
-                var manager = db.Manager.FirstOrDefault(m => m.managerId == group.managerFk);
-                db.Manager.Remove(manager);
+
+                var manager = db.Manager.FirstOrDefault(m => m.userFk == user.userId);
+                var group = db.Groups.FirstOrDefault(g => g.groupId == id && g.managerFk == manager.managerId);
+                if ( group !=null)
+                {
+                    group.managerFk = null;
+                }
+
                 db.SaveChanges();
                 return "1";
             }
