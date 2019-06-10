@@ -195,6 +195,9 @@
     <FunctionImport Name="spAsistanceOfManager" ReturnType="Collection(AgmModel.spAsistanceOfManager_Result)">
       <Parameter Name="managerId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="spMemberofGroup" ReturnType="Collection(AgmModel.spMemberofGroup_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="spGroupsManager_Result">
     <Property Type="Int32" Name="groupId" Nullable="false" />
@@ -225,5 +228,10 @@
     <Property Type="String" Name="userNameSurname" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="spMemberofGroup_Result">
+    <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="groupFk" Nullable="false" />
   </ComplexType>
 </Schema>

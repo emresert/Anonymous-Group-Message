@@ -263,7 +263,9 @@
     </Compile>
     <Compile Include="Hubs\MsgHub.cs" />
     <Compile Include="Models\Class\asistanceModel.cs" />
+    <Compile Include="Models\Class\groupInfoView.cs" />
     <Compile Include="Models\Class\groupsModel.cs" />
+    <Compile Include="Models\Class\managerModel.cs" />
     <Compile Include="Models\Class\textMessageModel.cs" />
     <Compile Include="Models\Class\usersgroupModel.cs" />
     <Compile Include="Models\Class\usersModel.cs" />
@@ -295,6 +297,9 @@
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\spGroupsManager_Result.cs">
+      <DependentUpon>AgmDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntityFramework\spMemberofGroup_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\spUserGroup_Result.cs">
@@ -347,6 +352,8 @@
     <Content Include="Views\TextMessage\Create.cshtml" />
     <Content Include="Views\Groups\AddUserToGroup.cshtml" />
     <Content Include="Views\Groups\addUser.cshtml" />
+    <Content Include="Views\Groups\InfoIndex.cshtml" />
+    <Content Include="Views\Groups\groupInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

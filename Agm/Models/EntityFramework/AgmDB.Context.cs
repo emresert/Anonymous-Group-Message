@@ -124,5 +124,14 @@ namespace Agm.Models.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAsistanceOfManager_Result>("spAsistanceOfManager", managerIdParameter);
         }
+    
+        public virtual ObjectResult<spMemberofGroup_Result> spMemberofGroup(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMemberofGroup_Result>("spMemberofGroup", idParameter);
+        }
     }
 }

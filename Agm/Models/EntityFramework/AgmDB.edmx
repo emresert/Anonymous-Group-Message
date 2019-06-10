@@ -201,6 +201,9 @@
           <Parameter Name="userId" Type="int" Mode="In" />
           <Parameter Name="groupId" Type="int" Mode="In" />
         </Function>
+        <Function Name="spMemberofGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="spUserGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -450,7 +453,10 @@
             <Parameter Name="groupid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spAsistanceOfManager" ReturnType="Collection(AgmModel.spAsistanceOfManager_Result)">
-            <Parameter Name="managerId" Mode="In" Type="Int32" />
+          <Parameter Name="managerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spMemberofGroup" ReturnType="Collection(AgmModel.spMemberofGroup_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spGroupsManager_Result">
@@ -482,6 +488,11 @@
           <Property Type="String" Name="userNameSurname" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="spMemberofGroup_Result">
+          <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="groupFk" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -607,6 +618,15 @@
                 <ScalarProperty Name="userNameSurname" ColumnName="userNameSurname" />
                 <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
                 <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spMemberofGroup" FunctionName="AgmModel.Store.spMemberofGroup">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AgmModel.spMemberofGroup_Result">
+                <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
+                <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
+                <ScalarProperty Name="groupFk" ColumnName="groupFk" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

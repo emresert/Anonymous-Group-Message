@@ -289,7 +289,7 @@ namespace Agm.Controllers
             return View();
         }
 
-        public ActionResult Info()
+        public ActionResult InfoIndex()
         {
             var user = Session["User"] as Users;
             if (user == null)
@@ -314,9 +314,44 @@ namespace Agm.Controllers
             {
                 ViewBag.NoResult = "Henüz yönetici olduğunuz herhangi bir grubunuz yok.";
             }
+
             return View();
         }
-
+        public ActionResult groupInfo(int id)
+        {
+            var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var group = db.Groups.FirstOrDefault(g => g.groupId == id);
+            ViewBag.gImage = group.groupImageUrl;
+            ViewBag.gName = group.groupName;
+            ViewBag.gCode = group.groupCode;
+            var manager = db.Manager.FirstOrDefault(m => m.managerId == group.managerFk);
+            ViewBag.gManager = manager.managerNameSurname;
+            var mImage = db.Users.FirstOrDefault(u =>u.userId == manager.userFk);
+            ViewBag.mImage = mImage.userImageUrl;
+            var result = db.spMemberofGroup(id).ToList();
+            if (result.Count != 0)
+            {
+                var userList = new List<usersModel>();
+                foreach (var users in result)
+                {
+                    var uModel = new usersModel();
+                    uModel.userImageUrl = users.userImageUrl;
+                    uModel.userLoginName = users.userLoginName;
+                    userList.Add(uModel);
+                }
+                return View(userList);
+            }
+            else
+            {
+                ViewBag.NoResult = "Henüz bu grupta bir üye yok.";
+            }
+            
+            return View();
+        }
         public ActionResult AddUserToGroup()
         {
             var user = Session["User"] as Users;

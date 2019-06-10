@@ -122,5 +122,14 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spMemberofGroup" FunctionName="AgmModel.Store.spMemberofGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AgmModel.spMemberofGroup_Result">
+          <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
+          <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
+          <ScalarProperty Name="groupFk" ColumnName="groupFk" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
