@@ -1,0 +1,16 @@
+﻿.my-card
+{
+    position:absolute;
+    left:5%;
+    top:-20px;
+    border-radius:50%;
+}
+.cardCapsule{
+    margin:auto;
+    margin-left:5%;
+}
+.gImage{
+    margin:auto;
+    width:50px;
+    height:50px;
+}

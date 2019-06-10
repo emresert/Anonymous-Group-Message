@@ -177,6 +177,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\groupCreate.css" />
     <Content Include="Content\groupIndex.css" />
+    <Content Include="Content\groupInfo.css" />
     <Content Include="Content\homeIndex.css" />
     <Content Include="Content\navbarIndex.css" />
     <Content Include="Content\site.css" />

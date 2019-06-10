@@ -333,6 +333,9 @@ namespace Agm.Controllers
             var mImage = db.Users.FirstOrDefault(u =>u.userId == manager.userFk);
             ViewBag.mImage = mImage.userImageUrl;
             var result = db.spMemberofGroup(id).ToList();
+            var message = db.TextMessage.Where(f => f.groupFk == id).ToList();
+            ViewBag.MessageCount = message.Count;
+            ViewBag.UsersCount = result.Count;
             if (result.Count != 0)
             {
                 var userList = new List<usersModel>();
