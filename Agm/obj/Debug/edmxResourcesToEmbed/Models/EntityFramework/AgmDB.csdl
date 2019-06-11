@@ -170,9 +170,9 @@
       <Parameter Name="userFk" Mode="In" Type="Int32" />
       <Parameter Name="groupFk" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="spAddUserGroupsWithLogName">
-      <Parameter Name="userLogName" Mode="In" Type="String" />
+    <FunctionImport Name="spCheckGrupAsistance" ReturnType="Collection(AgmModel.spCheckGrupAsistance_Result)">
       <Parameter Name="groupFk" Mode="In" Type="Int32" />
+      <Parameter Name="aId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="spGroupJoin">
       <Parameter Name="userId" Mode="In" Type="Int32" />
@@ -185,6 +185,9 @@
       <Parameter Name="userId" Mode="In" Type="Int32" />
       <Parameter Name="groupId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="spMemberofGroup" ReturnType="Collection(AgmModel.spMemberofGroup_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="spUserGroup" ReturnType="Collection(AgmModel.spUserGroup_Result)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -192,13 +195,15 @@
       <Parameter Name="id" Mode="In" Type="Int32" />
       <Parameter Name="groupid" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="spAsistanceOfManager" ReturnType="Collection(AgmModel.spAsistanceOfManager_Result)">
-      <Parameter Name="managerId" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="spMemberofGroup" ReturnType="Collection(AgmModel.spMemberofGroup_Result)">
-      <Parameter Name="id" Mode="In" Type="Int32" />
+    <FunctionImport Name="spAddUserGroupsWithLogName">
+      <Parameter Name="userLogName" Mode="In" Type="String" />
+      <Parameter Name="groupFk" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="spCheckGrupAsistance_Result">
+    <Property Type="Int32" Name="groupFk" Nullable="false" />
+    <Property Type="Int32" Name="asistanceFk" Nullable="false" />
+  </ComplexType>
   <ComplexType Name="spGroupsManager_Result">
     <Property Type="Int32" Name="groupId" Nullable="false" />
     <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
@@ -207,6 +212,12 @@
     <Property Type="String" Name="managerNameSurname" Nullable="true" MaxLength="100" />
     <Property Type="Int32" Name="managerId" Nullable="false" />
     <Property Type="Int32" Name="userFk" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="spMemberofGroup_Result">
+    <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="groupFk" Nullable="false" />
+    <Property Type="Int32" Name="userId" Nullable="false" />
   </ComplexType>
   <ComplexType Name="spUserGroup_Result">
     <Property Type="Int32" Name="groupId" Nullable="false" />
@@ -217,21 +228,5 @@
     <Property Type="Int32" Name="groupId" Nullable="false" />
     <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
     <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
-  </ComplexType>
-  <ComplexType Name="spAsistanceOfManager_Result">
-    <Property Type="String" Name="asistanceNameSurname" Nullable="true" MaxLength="100" />
-    <Property Type="Int32" Name="asistanceId" Nullable="false" />
-    <Property Type="Int32" Name="groupId" Nullable="false" />
-    <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
-    <Property Type="Int32" Name="managerId" Nullable="false" />
-    <Property Type="Int32" Name="userId" Nullable="false" />
-    <Property Type="String" Name="userNameSurname" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
-  </ComplexType>
-  <ComplexType Name="spMemberofGroup_Result">
-    <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
-    <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
-    <Property Type="Int32" Name="groupFk" Nullable="false" />
   </ComplexType>
 </Schema>

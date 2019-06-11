@@ -16,5 +16,6 @@ namespace Agm.Models.EntityFramework
         public string userImageUrl { get; set; }
         public string userLoginName { get; set; }
         public int groupFk { get; set; }
+        public int userId { get; set; }
     }
 }

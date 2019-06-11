@@ -182,8 +182,9 @@
     <Parameter Name="userLogName" Type="nvarchar" Mode="In" />
     <Parameter Name="groupFk" Type="int" Mode="In" />
   </Function>
-  <Function Name="spAsistanceOfManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="managerId" Type="int" Mode="In" />
+  <Function Name="spCheckGrupAsistance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="groupFk" Type="int" Mode="In" />
+    <Parameter Name="aId" Type="int" Mode="In" />
   </Function>
   <Function Name="spGroupJoin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userId" Type="int" Mode="In" />

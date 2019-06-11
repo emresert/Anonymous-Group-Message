@@ -11,16 +11,9 @@ namespace Agm.Models.EntityFramework
 {
     using System;
     
-    public partial class spAsistanceOfManager_Result
+    public partial class spCheckGrupAsistance_Result
     {
-        public string asistanceNameSurname { get; set; }
-        public int asistanceId { get; set; }
-        public int groupId { get; set; }
-        public string groupName { get; set; }
-        public int managerId { get; set; }
-        public int userId { get; set; }
-        public string userNameSurname { get; set; }
-        public string userLoginName { get; set; }
-        public string userImageUrl { get; set; }
+        public int groupFk { get; set; }
+        public int asistanceFk { get; set; }
     }
 }

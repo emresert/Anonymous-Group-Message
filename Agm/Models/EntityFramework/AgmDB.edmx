@@ -187,8 +187,9 @@
           <Parameter Name="userLogName" Type="nvarchar" Mode="In" />
           <Parameter Name="groupFk" Type="int" Mode="In" />
         </Function>
-        <Function Name="spAsistanceOfManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="managerId" Type="int" Mode="In" />
+        <Function Name="spCheckGrupAsistance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupFk" Type="int" Mode="In" />
+          <Parameter Name="aId" Type="int" Mode="In" />
         </Function>
         <Function Name="spGroupJoin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userId" Type="int" Mode="In" />
@@ -430,9 +431,9 @@
             <Parameter Name="userFk" Mode="In" Type="Int32" />
             <Parameter Name="groupFk" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spAddUserGroupsWithLogName">
-            <Parameter Name="userLogName" Mode="In" Type="String" />
+          <FunctionImport Name="spCheckGrupAsistance" ReturnType="Collection(AgmModel.spCheckGrupAsistance_Result)">
             <Parameter Name="groupFk" Mode="In" Type="Int32" />
+            <Parameter Name="aId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGroupJoin">
             <Parameter Name="userId" Mode="In" Type="Int32" />
@@ -445,6 +446,9 @@
             <Parameter Name="userId" Mode="In" Type="Int32" />
             <Parameter Name="groupId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spMemberofGroup" ReturnType="Collection(AgmModel.spMemberofGroup_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spUserGroup" ReturnType="Collection(AgmModel.spUserGroup_Result)">
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -452,13 +456,15 @@
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="groupid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spAsistanceOfManager" ReturnType="Collection(AgmModel.spAsistanceOfManager_Result)">
-          <Parameter Name="managerId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="spMemberofGroup" ReturnType="Collection(AgmModel.spMemberofGroup_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <FunctionImport Name="spAddUserGroupsWithLogName">
+            <Parameter Name="userLogName" Mode="In" Type="String" />
+            <Parameter Name="groupFk" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="spCheckGrupAsistance_Result">
+          <Property Type="Int32" Name="groupFk" Nullable="false" />
+          <Property Type="Int32" Name="asistanceFk" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="spGroupsManager_Result">
           <Property Type="Int32" Name="groupId" Nullable="false" />
           <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
@@ -467,6 +473,12 @@
           <Property Type="String" Name="managerNameSurname" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="managerId" Nullable="false" />
           <Property Type="Int32" Name="userFk" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spMemberofGroup_Result">
+          <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="groupFk" Nullable="false" />
+          <Property Type="Int32" Name="userId" Nullable="false" />
         </ComplexType>
         <ComplexType Name="spUserGroup_Result">
           <Property Type="Int32" Name="groupId" Nullable="false" />
@@ -477,22 +489,6 @@
           <Property Type="Int32" Name="groupId" Nullable="false" />
           <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="groupImageUrl" Nullable="true" MaxLength="250" />
-        </ComplexType>
-        <ComplexType Name="spAsistanceOfManager_Result">
-          <Property Type="String" Name="asistanceNameSurname" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="asistanceId" Nullable="false" />
-          <Property Type="Int32" Name="groupId" Nullable="false" />
-          <Property Type="String" Name="groupName" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="managerId" Nullable="false" />
-          <Property Type="Int32" Name="userId" Nullable="false" />
-          <Property Type="String" Name="userNameSurname" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
-        </ComplexType>
-        <ComplexType Name="spMemberofGroup_Result">
-          <Property Type="String" Name="userImageUrl" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="userLoginName" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="groupFk" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -572,7 +568,14 @@
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="spAddUserGroups" FunctionName="AgmModel.Store.spAddUserGroups" />
-          <FunctionImportMapping FunctionImportName="spAddUserGroupsWithLogName" FunctionName="AgmModel.Store.spAddUserGroupsWithLogName" />
+          <FunctionImportMapping FunctionImportName="spCheckGrupAsistance" FunctionName="AgmModel.Store.spCheckGrupAsistance">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AgmModel.spCheckGrupAsistance_Result">
+                <ScalarProperty Name="groupFk" ColumnName="groupFk" />
+                <ScalarProperty Name="asistanceFk" ColumnName="asistanceFk" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spGroupJoin" FunctionName="AgmModel.Store.spGroupJoin" />
           <FunctionImportMapping FunctionImportName="spGroupsManager" FunctionName="AgmModel.Store.spGroupsManager">
             <ResultMapping>
@@ -588,6 +591,16 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spLeaveGroup" FunctionName="AgmModel.Store.spLeaveGroup" />
+          <FunctionImportMapping FunctionImportName="spMemberofGroup" FunctionName="AgmModel.Store.spMemberofGroup">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AgmModel.spMemberofGroup_Result">
+                <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
+                <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
+                <ScalarProperty Name="groupFk" ColumnName="groupFk" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spUserGroup" FunctionName="AgmModel.Store.spUserGroup">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AgmModel.spUserGroup_Result">
@@ -606,30 +619,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spAsistanceOfManager" FunctionName="AgmModel.Store.spAsistanceOfManager">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AgmModel.spAsistanceOfManager_Result">
-                <ScalarProperty Name="asistanceNameSurname" ColumnName="asistanceNameSurname" />
-                <ScalarProperty Name="asistanceId" ColumnName="asistanceId" />
-                <ScalarProperty Name="groupId" ColumnName="groupId" />
-                <ScalarProperty Name="groupName" ColumnName="groupName" />
-                <ScalarProperty Name="managerId" ColumnName="managerId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="userNameSurname" ColumnName="userNameSurname" />
-                <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
-                <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spMemberofGroup" FunctionName="AgmModel.Store.spMemberofGroup">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AgmModel.spMemberofGroup_Result">
-                <ScalarProperty Name="userImageUrl" ColumnName="userImageUrl" />
-                <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
-                <ScalarProperty Name="groupFk" ColumnName="groupFk" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spAddUserGroupsWithLogName" FunctionName="AgmModel.Store.spAddUserGroupsWithLogName" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

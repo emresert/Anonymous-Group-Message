@@ -221,7 +221,7 @@ namespace Agm.Controllers
             }   
         }
 
-        public ActionResult AsistanceIndex()
+       /* public ActionResult AsistanceIndex()
         {
             var user = Session["User"] as Users;
             if (user == null)
@@ -236,7 +236,7 @@ namespace Agm.Controllers
             }
             else
             {
-                var result = db.spAsistanceOfManager(manager.managerId).ToList();
+               var result = db.spAsistanceOfManager(manager.managerId).ToList();
                 if (result.Count != 0)
                 {
                     var asistanceList = new List<asistanceModel>();
@@ -262,7 +262,7 @@ namespace Agm.Controllers
 
             return View();
         }
-
+        */
         public ActionResult CreateAsistance()
         {
             var user = Session["User"] as Users;
@@ -342,9 +342,13 @@ namespace Agm.Controllers
                 foreach (var users in result)
                 {
                     var uModel = new usersModel();
-                    uModel.userImageUrl = users.userImageUrl;
-                    uModel.userLoginName = users.userLoginName;
-                    userList.Add(uModel);
+                    if (manager.userFk != users.userId) {
+                        uModel.userId = users.userId;
+                        uModel.userImageUrl = users.userImageUrl;
+                        uModel.userLoginName = users.userLoginName;
+                        userList.Add(uModel);
+                    }
+                    
                 }
                 return View(userList);
             }
@@ -412,6 +416,27 @@ namespace Agm.Controllers
                 return View();
             }
        
+        }
+        [HttpPost]
+        public string RemoveUser(int id)
+        {
+            var user = Session["User"] as Users;
+            try
+            {
+
+                var manager = db.Manager.FirstOrDefault(m => m.userFk == user.userId);
+                var group = db.Groups.FirstOrDefault(g =>g.managerFk == manager.managerId);
+                var ugroup = db.spUserGroup(id).FirstOrDefault(g=>g.groupId==group.groupId);
+                db.spLeaveGroup(id,ugroup.groupId);
+                db.SaveChanges();
+
+                return "1";
+            }
+            catch
+            {
+
+                return "-1";
+            }
         }
     }
 }

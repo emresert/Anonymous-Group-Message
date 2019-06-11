@@ -245,6 +245,7 @@
     <Content Include="scripts\popper-utils.min.js" />
     <Content Include="scripts\popper.js" />
     <Content Include="scripts\popper.min.js" />
+    <Content Include="scripts\RemoveUserScript.js" />
     <Content Include="scripts\site.js" />
     <Content Include="scripts\umd\popper-utils.js" />
     <Content Include="scripts\umd\popper-utils.min.js" />
@@ -294,7 +295,7 @@
     <Compile Include="Models\EntityFramework\Manager.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityFramework\spAsistanceOfManager_Result.cs">
+    <Compile Include="Models\EntityFramework\spCheckGrupAsistance_Result.cs">
       <DependentUpon>AgmDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityFramework\spGroupsManager_Result.cs">

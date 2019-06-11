@@ -10,7 +10,7 @@
         
         <div class="col-md-3">
             <div class="card border-info mx-sm-1 p-3">
-                <div class="card border-info shadow text-info p-3 my-card"><span class="fas fa-code" aria-hidden="true"></span></div>
+                <div class="card border-warning shadow text-warning p-3 my-card"><span  class="fas fa-code" aria-hidden="true"></span></div>
                 <div class="text-info text-center mt-3"><h4>Grup Kodu</h4></div>
                 <div class="text-info text-center mt-3"><h4>@ViewBag.gCode</h4></div>     
                        
@@ -18,21 +18,21 @@
         </div>
         <div class="col-md-3">
             <div class="card border-info mx-sm-1 p-3">
-                <div class="card border-info shadow text-info p-3 my-card"><span class="fas fa-user-shield" aria-hidden="true"></span></div>
+                <div class="card border-warning shadow text-warning p-3 my-card"><span class="fas fa-user-shield" aria-hidden="true"></span></div>
                 <div class="text-info text-center mt-3"><h4>Yönetici</h4></div>
                 <div class="text-info text-center mt-3"><h4>@ViewBag.gManager</h4></div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card border-info mx-sm-1 p-3">
-                <div class="card border-info shadow text-info p-3 my-card"><span class="fas fa-users" aria-hidden="true"></span></div>
+                <div class="card border-warning shadow text-warning p-3 my-card"><span class="fas fa-users" aria-hidden="true"></span></div>
                 <div class="text-info text-center mt-3"><h4>Üye Sayısı</h4></div>
                 <div class="text-info text-center mt-3"><h4>@ViewBag.UsersCount</h4></div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card border-info mx-sm-1 p-3">
-                <div class="card border-info shadow text-info p-3 my-card"><span class="fas fa-envelope-open-text" aria-hidden="true"></span></div>
+                <div class="card border-warning shadow text-warning p-3 my-card"><span class="fas fa-envelope-open-text" aria-hidden="true"></span></div>
                 <div class="text-info text-center mt-3"><h4>Toplam Mesaj</h4></div>
                 <div class="text-info text-center mt-3"><h4>@ViewBag.MessageCount</h4></div>
             </div>
@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div class="container mt-5">
+<div class="container mt-3">
     <div class="search-table">
         <div class="search-box capsule" style="background:none !important;">
             <div class="row">
@@ -68,23 +68,26 @@
         </div>
 
         <div class="search-list ">
-            <table class="table table-responsive-sm" id="myTable" style="">
+            <table class="table table-responsive-sm" id="myRemoveTable" style="">
                 <tbody>
                     @if (Model != null)
                     {
                         foreach (var item in Model)
                         {
+
                             <tr>
                                 <td>
                                     <img alt="asd" src="@item.userImageUrl" style="width:50px;height:50px;border:0px solid black;border-radius:50%;" />
                                 </td>
                                 <td>
-                                    <a style="text-decoration:none;" href="@Url.Action("Index","TextMessage", new {id=item.userId})">
-                                        <h6 class="h6">@item.userLoginName</h6>
-                                    </a>
+                                    @Html.DisplayFor(modelItem => item.userLoginName)
                                 </td>
+                               
                                 <td>
-                                        <center><i class="fas fa-trash-alt" style="color:red;cursor:pointer; margin-top:7px;"></i></center>
+                                    <a class="removeGroup" data-id=@item.userId>
+                                        <i class="fas fa-user-times" style="color:red;cursor:pointer;"></i>
+                                    </a>
+
                                 </td>
                             </tr>
                         }

@@ -46,17 +46,17 @@ namespace Agm.Models.EntityFramework
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddUserGroups", userFkParameter, groupFkParameter);
         }
     
-        public virtual int spAddUserGroupsWithLogName(string userLogName, Nullable<int> groupFk)
+        public virtual ObjectResult<spCheckGrupAsistance_Result> spCheckGrupAsistance(Nullable<int> groupFk, Nullable<int> aId)
         {
-            var userLogNameParameter = userLogName != null ?
-                new ObjectParameter("userLogName", userLogName) :
-                new ObjectParameter("userLogName", typeof(string));
-    
             var groupFkParameter = groupFk.HasValue ?
                 new ObjectParameter("groupFk", groupFk) :
                 new ObjectParameter("groupFk", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddUserGroupsWithLogName", userLogNameParameter, groupFkParameter);
+            var aIdParameter = aId.HasValue ?
+                new ObjectParameter("aId", aId) :
+                new ObjectParameter("aId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spCheckGrupAsistance_Result>("spCheckGrupAsistance", groupFkParameter, aIdParameter);
         }
     
         public virtual int spGroupJoin(Nullable<int> userId, Nullable<int> groupId)
@@ -94,6 +94,15 @@ namespace Agm.Models.EntityFramework
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spLeaveGroup", userIdParameter, groupIdParameter);
         }
     
+        public virtual ObjectResult<spMemberofGroup_Result> spMemberofGroup(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMemberofGroup_Result>("spMemberofGroup", idParameter);
+        }
+    
         public virtual ObjectResult<spUserGroup_Result> spUserGroup(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -116,22 +125,17 @@ namespace Agm.Models.EntityFramework
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<userGroupsUsidGrpid_Result>("userGroupsUsidGrpid", idParameter, groupidParameter);
         }
     
-        public virtual ObjectResult<spAsistanceOfManager_Result> spAsistanceOfManager(Nullable<int> managerId)
+        public virtual int spAddUserGroupsWithLogName(string userLogName, Nullable<int> groupFk)
         {
-            var managerIdParameter = managerId.HasValue ?
-                new ObjectParameter("managerId", managerId) :
-                new ObjectParameter("managerId", typeof(int));
+            var userLogNameParameter = userLogName != null ?
+                new ObjectParameter("userLogName", userLogName) :
+                new ObjectParameter("userLogName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAsistanceOfManager_Result>("spAsistanceOfManager", managerIdParameter);
-        }
+            var groupFkParameter = groupFk.HasValue ?
+                new ObjectParameter("groupFk", groupFk) :
+                new ObjectParameter("groupFk", typeof(int));
     
-        public virtual ObjectResult<spMemberofGroup_Result> spMemberofGroup(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spMemberofGroup_Result>("spMemberofGroup", idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAddUserGroupsWithLogName", userLogNameParameter, groupFkParameter);
         }
     }
 }
