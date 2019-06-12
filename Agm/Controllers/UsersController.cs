@@ -71,6 +71,26 @@ namespace Agm.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
+        public ActionResult Edit()
+        {
+            var user = Session["User"] as Users;
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var editUser = db.Users.FirstOrDefault(u => u.userId == user.userId);
+            var change = new usersModel();
+            change.userId = editUser.userId;
+            change.userEmail = editUser.userEmail;
+            change.userLoginName = editUser.userLoginName;
+            change.userPhoneNumber = editUser.userPhoneNumber;
+            change.userPassword = editUser.userPassword;
+            change.userNameSurname = editUser.userNameSurname;
+            ViewBag.uImage = editUser.userImageUrl;
+            change.userImageUrl = editUser.userImageUrl;
+
+            return View(change);
+        }
         public ActionResult Logout()
         {
             

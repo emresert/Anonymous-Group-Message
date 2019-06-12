@@ -1,0 +1,91 @@
+﻿@model Agm.Models.Class.usersModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_UserIndex.cshtml";
+}
+
+<div class="container bootstrap snippet mt-5">
+
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+
+            <div class="text-center">
+                <img src="@ViewBag.uImage" class="avatar img-circle img-thumbnail" alt="avatar">
+                <h6>Farklı bir resim ekleyin...</h6>
+                <input type="file" class="text-center center-block file-upload">
+            </div><br>
+
+            <ul class="list-group"><li class="list-group-item text-right"><span class="pull-left"><strong>Aktivite</strong></span><i class="fas fa-signal"></i></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Gruplarım</strong></span> 125</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Üyelerim</strong></span>31238</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Asistanlarım</strong></span> 13</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Mesajlarım</strong></span> 37</li>
+                
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><b>Profil Bilgileri</b></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <br>
+
+                    @using (Html.BeginForm())
+                    {
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="first_name">Adı Soyadı</label>
+                                @Html.EditorFor(model => model.userNameSurname, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.userNameSurname, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="first_name">Kullanıcı Adı</label>
+                                    @Html.EditorFor(model => model.userLoginName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.userLoginName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="first_name">Telefon Numarası</label>
+                                    @Html.EditorFor(model => model.userPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.userPhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="first_name">E-mail Adresi</label>
+                                @Html.EditorFor(model => model.userEmail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.userEmail, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="first_name">Şifre</label>
+                                    @Html.EditorFor(model => model.userPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.userPassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>                        <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="first_name">Şifre Tekrar</label>
+                                    @Html.EditorFor(model => model.userPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.userPassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-primary" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Kaydet</button>
+                                    <button class="btn btn-lg btn-primary" type="reset"><i class="glyphicon glyphicon-repeat"></i>Temizle</button>
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

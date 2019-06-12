@@ -251,6 +251,7 @@
     <Content Include="scripts\umd\popper-utils.min.js" />
     <Content Include="scripts\umd\popper.js" />
     <Content Include="scripts\umd\popper.min.js" />
+    <Content Include="scripts\userEdit.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -356,6 +357,7 @@
     <Content Include="Views\Groups\addUser.cshtml" />
     <Content Include="Views\Groups\InfoIndex.cshtml" />
     <Content Include="Views\Groups\groupInfo.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
