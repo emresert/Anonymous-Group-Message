@@ -70,7 +70,8 @@ namespace Agm.Controllers
             db.Users.Add(user);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
-        }
+            }
+
         public ActionResult Edit()
         {
             var user = Session["User"] as Users;

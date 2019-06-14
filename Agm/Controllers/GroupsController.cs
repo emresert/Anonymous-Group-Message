@@ -335,7 +335,7 @@ namespace Agm.Controllers
             var result = db.spMemberofGroup(id).ToList();
             var message = db.TextMessage.Where(f => f.groupFk == id).ToList();
             ViewBag.MessageCount = message.Count;
-            ViewBag.UsersCount = result.Count;
+            ViewBag.UsersCount = result.Count - 1;
             if (result.Count != 0)
             {
                 var userList = new List<usersModel>();
