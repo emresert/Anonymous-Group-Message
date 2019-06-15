@@ -39,18 +39,17 @@
                         {
 
                             <tr>
-                                <td>
-                                    <img alt="asd" src="@item.groupImageUrl" style="width:50px;height:50px;border:0px solid black;border-radius:50%;" />
+                                <td class="groupImgTd">
+                                    <img alt="asd" class="imgGroup" src="@item.groupImageUrl" style="" />
                                 </td>
                                 <td>
-                                    <a style="text-decoration: none;" href="@Url.Action("Index","TextMessage", new {id=item.groupId})">
-                                        <h6 class="h6">@item.groupName</h6>
+                                    <a class="groupLink" href="@Url.Action("Index","TextMessage", new {id=item.groupId})">
+                                        <h6 class="h6 groupName">@item.groupName</h6>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="IconTd">
                                     <a href="@Url.Action("Create","TextMessage", new {id=item.groupId})">
-                                        
-                                        <center>  <i class="fas fa-paper-plane" style="color:forestgreen;cursor:pointer; margin-top:7px;"></i></center>
+                                        <center>  <i class="sendIcon fas fa-envelope fa-2x"></i></center>
                                     </a>
                                 </td>
                             </tr>

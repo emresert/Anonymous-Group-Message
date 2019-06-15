@@ -1,0 +1,11 @@
+﻿.avatar{
+    
+    border:3px solid black;
+    border-radius:5% !important;
+}
+label{
+    font-weight:bold;
+}
+.signalIcon{
+    color:limegreen;
+}

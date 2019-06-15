@@ -184,6 +184,7 @@
     <Content Include="Content\textMessageIndex.css" />
     <Content Include="Content\userCreate.css" />
     <Content Include="Content\userIndex.css" />
+    <Content Include="Content\userProfile.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Models\EntityFramework\AgmDB.Context.tt">

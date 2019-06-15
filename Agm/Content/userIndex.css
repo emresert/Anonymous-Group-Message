@@ -11,6 +11,18 @@
 .trash{
     color:red;cursor:pointer; margin-top:30px;
 }
+.sendIcon{
+    color:darkorange;cursor:pointer; margin-top:19px; margin-right:10px;
+}
+.editIcon{
+    color:dodgerblue;cursor:pointer; margin-top:30px; margin-right:10px;
+}
+.userAddIcon{
+    color:dodgerblue;cursor:pointer; margin-top:30px; margin-right:10px;
+}
+.infoIcon{
+    color:dodgerblue;cursor:pointer; margin-top:30px; margin-right:10px;
+}
 .groupImgTd{
     width:10% !important;
     
@@ -19,9 +31,10 @@
     margin-top:25px;
     font-size:20px;
     text-align:left;
-    overflow:hidden;
+    margin-left:10%;
+
    
 }
-.trashIconTd{
+.IconTd{
     width:5%;
 }

@@ -4,17 +4,17 @@
 
 th,.msgColumn {
     
-    overflow: hidden;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   width:100%;
 }
 .rmvMsg{
-      background-color:white !important;
-    overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-    float:right;
+   background-color:white !important;
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   float:right;
 }.header{
      background-color:ghostwhite;
      padding:5px;

@@ -39,16 +39,17 @@
                         foreach (var item in Model)
                         {
 
+                           
                             <tr>
-                                <td>
-                                    <img alt="asd" src="@item.groupImageUrl" style="width:50px;height:50px;border:0px solid black;border-radius:50%;" />
+                                <td class="groupImgTd">
+                                    <img alt="asd" class="imgGroup" src="@item.groupImageUrl" />
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.groupName)
+                                    <h6 class="h6 groupName">@item.groupName</h6>
                                 </td>
-                                <td>
+                                <td class="IconTd">
                                     <a href="@Url.Action("addUser","Groups",new {id=item.groupId})">
-                                        <i class="fas fa-user-plus" style="cursor:pointer;"></i>
+                                        <i class="userAddIcon fas fa-user-plus"></i>
                                     </a>
 
                                 </td>

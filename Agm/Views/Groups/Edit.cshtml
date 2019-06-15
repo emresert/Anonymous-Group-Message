@@ -13,12 +13,12 @@
     <div class="container createGroupContainer">
 
         <div class="form-group createFormGroup">
-            <label for="exampleInputEmail1"><b>Grup Adı</b></label>
+            <label for="exampleInputEmail1"><b><i class="far fa-keyboard"></i> Grup Adı</b></label>
             @Html.EditorFor(model => model.groupName, new { htmlAttributes = new { @class = "form-control", placeholder = "Lütfen bir grup adı giriniz" } })
             <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.groupName, "", new { @class = "text-danger" })</small>
         </div>
         <div class="form-group createFormGroup">
-            <label for="exampleFormControlFile1"><b>Grup Resmi</b></label>
+            <label for="exampleFormControlFile1"><b><i class="far fa-file-image"></i> Grup Resmi</b></label>
             <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1" />
             <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.groupImageUrl, "", new { @class = "text-danger" })</small>
         </div>

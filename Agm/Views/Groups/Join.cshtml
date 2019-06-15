@@ -13,7 +13,7 @@
 
     <div class="container JoinContainer">
         <div class="form-group createFormGroup">
-            <label for="exampleInputEmail1"><b>Grup Kodu</b></label>
+            <label for="exampleInputEmail1"><b><i class="fas fa-qrcode"></i> Grup Kodu </b></label>
             @Html.EditorFor(model => model.groupCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Lütfen bir grup kodu giriniz" } })
             <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.groupCode, "", new { @class = "text-danger" })</small>
         </div>    
