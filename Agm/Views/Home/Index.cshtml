@@ -38,16 +38,16 @@
                         foreach (var item in Model)
                         {
                             <tr>
-                                <td>
-                                    <img alt="asd" src="@item.groupImageUrl" style="width:50px;height:50px;border:0px solid black;border-radius:50%;" />
+                                <td class="groupImgTd">
+                                    <img alt="asd" src="@item.groupImageUrl" class="imgGroup" />
                                 </td>
                                 <td>
-                                    <a  style="text-decoration:none;"href="@Url.Action("Index","TextMessage", new {id=item.groupId})">
-                                    <h6  class="h6">@item.groupName</h6></a>
+                                    <a  class="groupLink" href="@Url.Action("Index","TextMessage", new {id=item.groupId})">
+                                    <h6  class="h6 groupName">@item.groupName</h6></a>
                                 </td>
-                                <td>
+                                <td class="trashIconTd">
                                     <a class="leaveGroup" data-id=@item.groupId>
-                                        <center><i class="fas fa-trash-alt" style="color:red;cursor:pointer; margin-top:7px;"></i></center>
+                                        <center><i class="trash fas fa-trash-alt" style=""></i></center>
                                     </a>
                                 </td>
                             </tr>

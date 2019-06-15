@@ -1,0 +1,27 @@
+﻿
+.imgGroup{
+    width:75px;height:75px;border:0px solid black;border-radius:50%;
+}
+
+.groupLink{
+   display:block;
+    text-decoration:none !important;
+    margin:auto;
+}
+.trash{
+    color:red;cursor:pointer; margin-top:30px;
+}
+.groupImgTd{
+    width:10% !important;
+    
+}
+.groupName{
+    margin-top:25px;
+    font-size:20px;
+    text-align:left;
+    overflow:hidden;
+   
+}
+.trashIconTd{
+    width:5%;
+}
