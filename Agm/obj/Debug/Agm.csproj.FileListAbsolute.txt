@@ -49,7 +49,6 @@ C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Newtonsoft.Json.xml
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\System.Net.Http.Formatting.xml
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\System.Web.Http.xml
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\System.Web.Http.WebHost.xml
-C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\obj\Debug\Agm.csprojResolveAssemblyReference.cache
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\obj\Debug\Agm.dll
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\obj\Debug\Agm.pdb
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\EntityFramework.dll
@@ -69,3 +68,6 @@ C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.AspNet.SignalR.SystemWeb
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.Owin.xml
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\bin\Microsoft.Owin.Security.xml
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\obj\Debug\Agm.csprojAssemblyReference.cache
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\obj\Debug\Agm.csproj.CoreCompileInputs.cache
+C:\Users\Emre Sert\Desktop\Projem\Agm\Agm\obj\Debug\Agm.csproj.CopyComplete
