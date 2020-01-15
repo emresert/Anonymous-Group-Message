@@ -67,10 +67,18 @@ Komut Uygulama Resim link : https://i.hizliresim.com/bvNDMG.jpg
 
 Çözüm sayfasını merak edenler : https://social.msdn.microsoft.com/Forums/sqlserver/en-US/742aa595-45f0-41d9-9fd0-8be9a85c8903/service-broker-is-disabled-in-msdb-or-msdb-failed-to-start?forum=sqlservicebroker
 
-8-) Artık Visual Studio'ya tekrar girip projeyi ister F5 ile isterseniz Debug Sekmesi altındaki Start Debugging yaparak çalıştırabilirisiniz. Bu arada Login ekranı gelince kullanıcı adına ##### yönetici ##### parola kısmınada ##### asd ##### yazarak giriş yapıp projenin çalıştığını test edebilirsiniz. Son olarak IIS ayarlarına ihtiyaç duyan bazı kullanıcılar olabilir. IIS Açma linkinide alt kısımda ek olarak bıraktım.
+8-) Artık Visual Studio'ya tekrar girip projeyi ister F5 ile isterseniz Debug Sekmesi altındaki Start Debugging yaparak çalıştırabilirisiniz. 
+
+9-) Login ekranı gelince projenin çalışıp çalışmadığını aşağıdaki test kullanıcı adı ve şifre ile girip test edebilirsiniz. 
+
+Kullanıcı Adı : yönetici
+Şifre : asd
+
+Not: Login ekranı bilgisayarınızda ilk kez derleneceği için geç gelebilir.
+
+10-) Proje derleme aşamasında IIS ayarlarına ihtiyaç duyan kullanıcılar olabilir. IIS Ayarlarını hiç aktif etmemiş kullanıclar için ek olarak IIS aktif etme linkine alt satırda erişebilirsiniz.
 
     IIS Nasıl Açılır : https://www.youtube.com/watch?v=9i7JIkVjv3E
-
 
 Projem sizlere faydalı olduysa ne mutlu bana. Hepinize başarılar dilerim...
 
