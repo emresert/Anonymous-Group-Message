@@ -30,13 +30,15 @@ Introduction video url of the project : https://www.youtube.com/watch?v=Umh5fdy-
 3-) Bilgisayarınızda mutlaka database işlemlerini kullanmanız için Ms SQL olması gerek.Ben bu projeyi yaparken Mictosoft SQL Server 2014 Management Studio kullandım.
 
 --- Agm Database Oluşturma Method 1 ---
+
 4.1-) Anonymous-Group-Message\DataBase klasörüne girin. Agm.mdf ve Agm_log database dosyalarını SQL Server'inize import etmeniz gerekecek.(Sql Db Attach)
 
-Attac Nasıl Yapılı : https://www.youtube.com/watch?v=fUpc9cwbmFw
+Attach Nasıl Yapılır : https://www.youtube.com/watch?v=fUpc9cwbmFw
 
 Bu linkdeki videoyu izleyip adımları tek tek yapın. Bu dosyaları videodaki gibi bu şekilde çalıştırmanız gerekecek.
 
 --- Agm Database  Oluşturma Method 2 ---
+
 4.2-) Sql bilgisi biraz daha iyi olanlar Anonymous-Group-Message\DataBase klasöründeki AgmDbScript'i çalıştırabilir. Scriptin 1. satırında aşağıdaki adımlara dikkat edin.
 
      Use [Agm] 	            -> komutunu sil
