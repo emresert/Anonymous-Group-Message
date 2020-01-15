@@ -33,7 +33,7 @@ Introduction video url of the project : https://www.youtube.com/watch?v=Umh5fdy-
 
 4.1-) Anonymous-Group-Message\DataBase klasörüne girin. Agm.mdf ve Agm_log database dosyalarını SQL Server'inize import etmeniz gerekecek.(Sql Db Attach)
 
-Attach Nasıl Yapılır : https://www.youtube.com/watch?v=fUpc9cwbmFw
+    Attach Nasıl Yapılır : https://www.youtube.com/watch?v=fUpc9cwbmFw
 
 Bu linkdeki videoyu izleyip adımları tek tek yapın. Bu dosyaları videodaki gibi bu şekilde çalıştırmanız gerekecek.
 
@@ -47,32 +47,36 @@ Bu linkdeki videoyu izleyip adımları tek tek yapın. Bu dosyaları videodaki g
 5-) Bilgisayarınızda projeyi çalıştırabilmeniz için Microsoft Visual Studio olması gerekir. Yoksa yükleyin (https://azure.microsoft.com/tr-tr/products/visual-studio/). Daha sonra Anonymous-Group-Message klasörüne girip Agm.sln uzantılı dosyaya çift tıklayıp çalıştırın. Visual Studio'nun projeyi yüklemesini bekleyin. Ayrıca açıldıktan sonra kodlara da ulaşabilirsiniz. Error List'de sarı renk türünde uyarılar olabilir. Muhtemelen referansını verdiğim eklentilerin güncel versiyonları için bilgilendirme gelebilir.
 
 6-) Solution Explorer'daki Web.Config dosyasında ayarlar yapmanız gerekiyor. Bu ayar database bağlantısı için gerekli.
-Yapmanız gereken tek şey Web.config dosyasına girip belirttiğim kısma kendi Sql Server adınızı yazmanız gerekiyor. Çünkü projeyi kendi bilgisayarımda geliştirdiğim için benim bilgisayarımdaki Sql Server adı orada yer alıyor. Sql server adını bilmeyenler bu linki inceleyerek kendi Sql Server adını öğrenebilir.(https://sqlserveregitimleri.com/sql-serverda-server-adini-ogrenmek)
+Yapmanız gereken tek şey Web.config dosyasına girip belirttiğim kısma kendi Sql Server adınızı yazmanız gerekiyor. Çünkü projeyi kendi bilgisayarımda geliştirdiğim için benim bilgisayarımdaki Sql Server adı orada yer alıyor. Sql server adını bilmeyenler bu linki inceleyerek kendi Sql Server adını öğrenebilir.
+
+    Sql Server Adı Öğrenme:https://sqlserveregitimleri.com/sql-serverda-server-adini-ogrenmek
 
 Dipnot: Server adınızı yıldızların içine yazmayın onları belirtmek için kullandım. Yıldızları kaldırın yani unutmayın! :)
 
-Değişecek Kısım => connectionString="Data Source=DESKTOP-9SG6I3G\SQLEXPRESS;Initial Catalog=Agm;Integrated Security=True"
+    Değişecek Kısım => connectionString="Data Source=DESKTOP-9SG6I3G\SQLEXPRESS;Initial Catalog=Agm;Integrated Security=True"
 
- <connectionStrings>
-    <add name="MsgConnection" connectionString="Data Source=  **Kendi SQL Server Adınız** ;Initial Catalog=Agm;Integrated Security=True"         providerName="System.Data.SqlClient" />
- </connectionStrings>
+    <connectionStrings>
+        <add name="MsgConnection" connectionString="Data Source=  **Kendi SQL Server Adınız** ;
+            Initial Catalog=Agm;Integrated Security=True" providerName="System.Data.SqlClient" />
+     </connectionStrings>
 
 7-) Bazı kullanıcılar projeyi çalıştırırken SQL Service Broker hatası alabilir. Bu hatayı önlemek için Sql komutu yazmamız gerekli. Bu hatayı alanlar resimde gösterdiğim Sql komutunu yazması gerekir.
 
 ** Agm database'i seçip aşağıdaki komutu yazıp execute(F5) edin!
 
-Komut :   ALTER DATABASE [Agm] SET ENABLE_BROKER
+    Komut :   ALTER DATABASE [Agm] SET ENABLE_BROKER
 
-Komut Uygulama Resim link : https://i.hizliresim.com/bvNDMG.jpg
+    Komut Uygulama Resim link : https://i.hizliresim.com/bvNDMG.jpg
 
-Çözüm sayfasını merak edenler : https://social.msdn.microsoft.com/Forums/sqlserver/en-US/742aa595-45f0-41d9-9fd0-8be9a85c8903/service-broker-is-disabled-in-msdb-or-msdb-failed-to-start?forum=sqlservicebroker
+    Çözüm sayfasını merak edenler : https://social.msdn.microsoft.com/Forums/sqlserver/en-US/742aa595-45f0-41d9-9fd0-8be9a85c8903/service-broker-is-disabled-in-msdb-or-msdb-failed-to-start?forum=sqlservicebroker
 
 8-) Artık Visual Studio'ya tekrar girip projeyi ister F5 ile isterseniz Debug Sekmesi altındaki Start Debugging yaparak çalıştırabilirisiniz. 
 
 9-) Login ekranı gelince projenin çalışıp çalışmadığını aşağıdaki test kullanıcı adı ve şifre ile girip test edebilirsiniz. 
 
-Kullanıcı Adı : yönetici
-Şifre : asd
+    Kullanıcı Adı : yönetici
+    
+    Şifre : asd
 
 Not: Login ekranı bilgisayarınızda ilk kez derleneceği için geç gelebilir.
 
