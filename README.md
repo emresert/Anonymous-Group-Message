@@ -52,7 +52,10 @@ Yapmanız gereken tek şey Web.config dosyasına girip belirttiğim kısma kendi
     Sql Server Adı Öğrenme:https://sqlserveregitimleri.com/sql-serverda-server-adini-ogrenmek
 
 Dipnot: Server adınızı yıldızların içine yazmayın onları belirtmek için kullandım. Yıldızları kaldırın yani unutmayın! :)
-
+connectionString'i olmayanlar ve daha fazla hakkında bilgi almak isteyenler aşağıdaki linki kullanabilirler.
+    
+    https://www.kodlamamerkezi.com/asp-net/asp-nette-connectionstringi-web-config-dosyasindan-almak/
+    
     Değişecek Kısım => connectionString="Data Source=DESKTOP-9SG6I3G\SQLEXPRESS;Initial Catalog=Agm;Integrated Security=True"
 
     <connectionStrings>
